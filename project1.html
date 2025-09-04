@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 1 - Kyle Lunsford's Website</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -30,27 +32,43 @@
         </div>
     </nav>
 
-    <div class="container my-5">
-        <h1 class="mb-4">Project 1</h1>
-        <h2>Research Questions</h2>
-        <p>The central questions I am exploring in this project are:</p>
-        <p><strong>Are certain airports more prone to specific delay types?</strong></p>
-        <p><strong>Which airports handle delays more efficiently, measured by fewer minutes of delay per delayed flight?</strong></p>
-        <p><strong>What proportion of flights at each airport are delayed versus on-time?</strong></p>
-        <p>Flight delays are a common frustration for travelers, but the causes, frequency, and severity vary widely across airports. By asking these three questions, I aim to uncover patterns in what kinds of delays occur, how severe they are, and how often they affect travelers. Together, they provide a fuller picture of how different airports perform when it comes to reliability and efficiency.</p>
-        <h2 class="mt-5">Why These Questions Matter</h2>
-        <p class="lead">These questions connect directly to the passenger experience of air travel. Travelers care not only about why delays happen, but also about how often they occur and how long they last when they do. For example, northern airports may face more weather-related delays, while large hubs may be more affected by carrier scheduling or air traffic congestion. At the same time, some airports might delay many flights but recover quickly, while others may delay fewer flights but keep passengers waiting much longer. Exploring these patterns sheds light on the different challenges airports face and how those challenges impact travelers.</p>
-        <h2 class="mt-5">Dataset</h2>
-        <p class="lead">The dataset I am using is: <a href="https://www.kaggle.com/datasets/sriharshaeedala/airline-delay?resource=download" target="_blank">📊 Airline Delay Cause Dataset (Kaggle)</a></p>
-        <p class="lead">It includes:</p>
-        <ul class="list-group mb-5">
-            <li class="list-group-item">Airport information (code + full name)</li>
-            <li class="list-group-item">Airline information (carrier code + name)</li>
-            <li class="list-group-item">Flight counts (arrivals, cancellations, diversions)</li>
-            <li class="list-group-item">Delay causes and minutes (carrier, weather, NAS, security, late aircraft)</li>
-        </ul>
-        <p class="lead mb-5">This makes it possible to compare airports across all three dimensions: The types of delays they experience, Their efficiency in handling delays, and The share of flights affected by delays versus those arriving on time.</p>
-        <!-- Add more sections here as needed -->
+    <div class="hero-section text-center py-4 mb-4" style="background: url('https://via.placeholder.com/1920x400?text=Airport+Skyline') no-repeat center center/cover; color: white;">
+        <div class="container">
+            <h1 class="display-4" data-aos="fade-down">Project 1: Exploring Flight Delays</h1>
+            <p class="lead" data-aos="fade-up">Diving into the world of airport delays to uncover patterns and insights.</p>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 mb-5 text-center bg-light text-dark py-3 rounded">Project One</h1>
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Problem</strong> <i class="bi bi-exclamation-triangle-fill text-warning"></i></h3>
+                    <p>Air travel is one of the most widely used forms of transportation, but it also comes with one of the most frustrating experiences for passengers: delays. Delays can disrupt travel plans, cause missed connections, and lead to increased costs for both travelers and airlines. While delays are a familiar part of flying, the reasons behind them and the ways they affect travelers are not always the same across different airports. Some delays may be due to weather, others from airline operations or air traffic control, and each type of delay can impact passengers in unique ways.</p>
+                    <p>Understanding delays is important not only from the perspective of passengers who want reliable travel, but also for airlines and airports that aim to improve efficiency and reduce costs. By identifying which airports are more prone to certain types of delays, or which ones manage disruptions better, we can gain insights into how the air travel system works and where improvements might be possible.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Central Questions</strong> <i class="bi bi-question-circle-fill text-primary"></i></h3>
+                    <div class="list-group">
+                        <div class="list-group-item" data-aos="zoom-in" data-aos-delay="100">
+                            <strong>Are certain airports more prone to specific delay types?</strong> For example, northern airports may experience more weather-related delays in the winter, while southern airports might be more affected by thunderstorms.
+                        </div>
+                        <div class="list-group-item" data-aos="zoom-in" data-aos-delay="200">
+                            <strong>Which airports handle delays more efficiently?</strong> This involves comparing how long delays last and identifying airports that minimize disruption versus those where delays tend to escalate.
+                        </div>
+                        <div class="list-group-item" data-aos="zoom-in" data-aos-delay="300">
+                            <strong>What proportion of flights at each airport are delayed versus on-time?</strong> By examining delay rates, I can compare overall reliability and efficiency across different airports.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-up">
+                    <p class="text-center">By addressing these questions, the project seeks to provide a clearer picture of how airports differ in reliability, the types of challenges they face, and how effectively they manage delays. This analysis can shed light on broader patterns in air travel and highlight where passengers are most likely to face disruptions.</p>
+                </section>
+            </div>
+        </div>
     </div>
 
     <footer class="bg-light text-center py-3">
@@ -58,5 +76,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+    </script>
 </body>
 </html>
