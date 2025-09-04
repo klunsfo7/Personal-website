@@ -69,6 +69,56 @@
                 </section>
             </div>
         </div>
+        <div class="bg-secondary py-1 my-5"></div>
+        <div class="container my-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                        <h3 class="mb-4 text-center"><strong>Introduce the Data</strong> <i class="bi bi-database-fill text-info"></i></h3>
+                        <p>The dataset I am using is the <a href="https://www.kaggle.com/datasets/sriharshaeedala/airline-delay" target="_blank">Airline Delay Cause dataset</a>, which I obtained from Kaggle (originally published by the U.S. Bureau of Transportation Statistics). It contains detailed records of flight performance across U.S. airports, focusing specifically on delay causes and outcomes.</p>
+                        <p>The dataset includes the following key features:</p>
+                        <ul class="list-group mb-4">
+                            <li class="list-group-item">year, month – Time period of the data (e.g., 2023, August).</li>
+                            <li class="list-group-item">carrier, carrier_name – Airline codes and names (e.g., “9E” for Endeavor Air Inc.).</li>
+                            <li class="list-group-item">airport, airport_name – Airport codes (IATA) and full airport names.</li>
+                            <li class="list-group-item">arr_flights – Total number of arriving flights at the airport.</li>
+                            <li class="list-group-item">arr_del15 – Number of flights delayed 15 minutes or more.</li>
+                            <li class="list-group-item">carrier_ct, weather_ct, nas_ct, security_ct, late_aircraft_ct – Count of delay instances by cause (e.g., airline-caused, weather-related, air traffic system, security, or late arriving aircraft).</li>
+                            <li class="list-group-item">arr_cancelled – Number of flights that were canceled.</li>
+                            <li class="list-group-item">arr_diverted – Number of flights diverted to another airport.</li>
+                            <li class="list-group-item">arr_delay – Total minutes of delay across all flights.</li>
+                            <li class="list-group-item">carrier_delay, weather_delay, nas_delay, security_delay, late_aircraft_delay – Total minutes of delay broken down by cause.</li>
+                        </ul>
+                        <p>This dataset is highly suitable for exploring my research questions because it not only tracks how many flights are delayed at each airport but also provides detailed breakdowns of delay frequency, delay causes, and total minutes lost. This allows me to analyze which airports face particular challenges, how severe those challenges are, and how effectively airports handle disruptions compared to others.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="bg-secondary py-1 my-5"></div>
+        <div class="container my-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                        <h3 class="mb-4 text-center"><strong>Pre-processing the Data</strong> <i class="bi bi-gear-fill text-success"></i></h3>
+                        <p>To prepare the dataset for analysis, I first loaded the CSV file into a pandas DataFrame and inspected its structure. This included checking the number of rows and columns, looking at the column names, and reviewing the data types to understand what information was available. I also checked for missing values to see where the data needed cleaning.</p>
+                        <p>Next, I handled missing values. Since the dataset contains counts and minutes, missing values in numeric columns were replaced with 0, which is a reasonable assumption that no flights or delays were recorded in those cases. For text columns, I replaced missing values with "Unknown" to ensure that grouping and analysis would still work properly. This step ensured that no rows were dropped and that all calculations could be performed smoothly.</p>
+                        <p>After that, I performed basic sanity checks. Specifically, I made sure that the number of delayed flights (arr_del15) did not exceed the total number of flights (arr_flights). This prevents unrealistic results and keeps ratios like the delay rate meaningful.</p>
+                        
+                        <div class="row my-4">
+                            <div class="col-md-6">
+                                <img src="CleaningShot1.png" alt="Image 1" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="CleaningShot2.png" alt="Image 2" class="img-fluid rounded">
+                            </div>
+                        </div>
+                        
+                        <p>I then created new features to better connect the dataset to my research questions. I calculated delay_rate, which is the proportion of flights delayed out of the total flights, as a way to measure reliability. I also created avg_delay_per_delayed_flight, which represents the average number of minutes lost when a flight is delayed, as a way to measure efficiency. In addition, I used the existing columns that break down delays by cause (carrier, weather, NAS, security, and late aircraft) to calculate how much each category contributes to the total delay minutes.</p>
+                        <p>Finally, I saved a cleaned version of the dataset as a new CSV file. This ensures that all later steps in the project, such as visualizations and analysis, are based on the same consistent and preprocessed data.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="bg-light text-center py-3">
