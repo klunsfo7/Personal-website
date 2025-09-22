@@ -21,6 +21,12 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Ensure consistent card image height and cropping */
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
+
 footer {
     border-top: 1px solid #e9ecef;
 }

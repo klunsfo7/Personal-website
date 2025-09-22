@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 - Kyle Lunsford's Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Kyle Lunsford</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section text-center py-4 mb-4" style="background: url('https://via.placeholder.com/1920x400?text=Project+2+Hero') no-repeat center center/cover; color: white;">
+        <div class="container">
+            <h1 class="display-4" data-aos="fade-down">Project 2: Title Placeholder</h1>
+            <p class="lead" data-aos="fade-up">A brief sentence describing the project focus.</p>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 mb-5 text-center bg-light text-dark py-3 rounded">Project Two</h1>
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Problem</strong> <i class="bi bi-exclamation-triangle-fill text-warning"></i></h3>
+                    <p>Heart disease is one of the leading causes of death around the world, and identifying it early is essential for prevention and treatment. Doctors and researchers often rely on medical tests and patient histories to assess risk, but with the growth of machine learning, we can now ask an important question: <strong>Can we predict whether a patient has heart disease based on their medical and demographic features?</strong></p>
+                    <p>This project explores that question by applying classification models to patient health data. The dataset includes a wide range of features such as age, sex, cholesterol levels, resting blood pressure, chest pain type, and exercise-induced angina that may indicate whether a patient is likely to have heart disease. By analyzing patterns in these features and training predictive models, the goal is to better understand which factors are most important and how accurately we can make such predictions.</p>
+                    <p>The purpose is not only to measure model performance but also to reflect on the broader implications. If machine learning can successfully predict heart disease risk, it could be used to support early detection efforts and provide healthcare professionals with valuable tools. However, it also raises questions about accuracy, fairness, and the impact of relying on automated predictions in medical decision-making.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Data</strong> <i class="bi bi-database-fill text-info"></i></h3>
+                    <p>The dataset used for this project is the Heart Failure Prediction dataset from Kaggle, widely used in machine learning research and healthcare prediction tasks. This dataset provides a combination of medical measurements and demographic information about patients, making it ideal for exploring predictive modeling in healthcare.</p>
+                    <p>Source: <a href="https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction" target="_blank">Kaggle: Heart Failure Prediction</a></p>
+                    <p>Each row represents an individual patient, and the target variable is <code>HeartDisease</code>, where 1 indicates the presence of heart disease and 0 indicates the absence of disease.</p>
+
+                    <h5 class="mt-4">Features in the Dataset</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Age</strong> — Patient’s age in years.</li>
+                        <li class="list-group-item"><strong>Sex</strong> — Patient’s gender (M = male, F = female).</li>
+                        <li class="list-group-item"><strong>ChestPainType</strong> — Type of chest pain experienced:
+                            <ul class="mb-0">
+                                <li>TA: Typical Angina</li>
+                                <li>ATA: Atypical Angina</li>
+                                <li>NAP: Non-Anginal Pain</li>
+                                <li>ASY: Asymptomatic</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item"><strong>RestingBP</strong> — Resting blood pressure (mm Hg).</li>
+                        <li class="list-group-item"><strong>Cholesterol</strong> — Serum cholesterol (mg/dl).</li>
+                        <li class="list-group-item"><strong>FastingBS</strong> — Fasting blood sugar > 120 mg/dl (1 = true, 0 = false).</li>
+                        <li class="list-group-item"><strong>RestingECG</strong> — Resting electrocardiogram results (Normal, ST-T abnormality, or LVH).</li>
+                        <li class="list-group-item"><strong>MaxHR</strong> — Maximum heart rate achieved during exercise.</li>
+                        <li class="list-group-item"><strong>ExerciseAngina</strong> — Exercise-induced angina (Y = yes, N = no).</li>
+                        <li class="list-group-item"><strong>Oldpeak</strong> — ST depression induced by exercise relative to rest.</li>
+                        <li class="list-group-item"><strong>ST_Slope</strong> — Slope of the peak exercise ST segment (Up, Flat, Down).</li>
+                        <li class="list-group-item"><strong>HeartDisease</strong> — Target variable (1 = presence, 0 = absence).</li>
+                    </ul>
+
+                    <h5 class="mt-3">Why This Dataset?</h5>
+                    <p>This dataset is well-suited for classification because it combines clinical indicators (blood pressure, cholesterol, ECG) with demographics (age, sex). The mix of categorical and numeric features supports meaningful preprocessing and model experimentation, and the task reflects a real-world problem with significant social and medical impact.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Pre-processing the Data</strong> <i class="bi bi-gear-fill text-success"></i></h3>
+                    <p><strong>To prepare the dataset for analysis</strong>, I first loaded the CSV file into a pandas DataFrame and inspected its structure. This included checking the number of rows and columns, reviewing the column names, and verifying the data types. I also checked for missing values or duplicates that could affect later analysis.</p>
+                    <p><strong>Deduplication</strong>: I removed duplicate rows to ensure that no patient records were counted more than once. Although the dataset did not contain missing values, I confirmed this by checking each column. This step was important because missing or duplicated information can bias results and reduce the reliability of the model.</p>
+                    <p><strong>Encoding categorical features</strong>: Since the dataset contained both numerical and categorical features, I encoded the categorical variables so they could be used by machine learning algorithms. Features such as <em>Sex</em>, <em>ChestPainType</em>, <em>RestingECG</em>, <em>ExerciseAngina</em>, and <em>ST_Slope</em> were converted using one-hot encoding. This transformation allows each category to be represented numerically without introducing ordinal bias. For example, “Male” and “Female” in the <em>Sex</em> column were converted into binary indicator variables.</p>
+                    <p><strong>Post-encoding checks</strong>: After encoding, I performed basic checks to confirm that the target variable (<code>HeartDisease</code>) remained balanced and that all features were represented correctly. This ensured that no information was lost in the transformation process and that the dataset was ready for analysis.</p>
+                    <p><strong>Persisting the cleaned data</strong>: Finally, I saved the cleaned version of the dataset as a new CSV file. This ensures that all later steps in the project, including visualizations and modeling, are based on the same consistent and preprocessed data. By cleaning and encoding the dataset up front, I reduced the risk of errors and created a reliable foundation for exploring patterns and building classification models.</p>
+
+                    <div class="row g-3 my-3">
+                        <div class="col-md-4">
+                            <img src="project2CleaningCode2.png" alt="Pre-processing screenshot 1" class="img-fluid rounded">
+                            <p class="text-muted small text-center mt-2">Screenshot 1: Load & inspect dataset</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="project2CleaningCode1.png" alt="Pre-processing screenshot 2" class="img-fluid rounded">
+                            <p class="text-muted small text-center mt-2">Screenshot 2: Deduplicate & encode features</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="project2CleaningCode3.png" alt="Pre-processing screenshot 3" class="img-fluid rounded">
+                            <p class="text-muted small text-center mt-2">Screenshot 3: Post-encoding checks & save</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-up">
+                    <h3 class="mb-4 text-center"><strong>Data Understanding & Visualization</strong> <i class="bi bi-bar-chart-fill text-primary"></i></h3>
+                    <div class="mb-4">
+                        <h5 class="mb-2">1) Heart Disease Class Distribution</h5>
+                        <p><strong>Why I made it:</strong> Before any modeling, it’s important to understand how balanced our dataset is. If one outcome dominates the data, a model might “guess” that outcome and still appear accurate.</p>
+                        <p><strong>What it shows:</strong> Both groups—patients with heart disease (1) and patients without (0)—are well represented. While not perfectly equal, there is no extreme imbalance.</p>
+                        <p><strong>How it helps answer our question:</strong> Confirms prediction is feasible. With both outcomes present, models can learn real patterns instead of defaulting to the majority class.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="data_understanding.png" alt="Class distribution bar chart" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">2) Age Distribution by Heart Disease</h5>
+                        <p><strong>Why I made it:</strong> Age is a well-established risk factor; we tested whether that relationship appears in our dataset.</p>
+                        <p><strong>What it shows:</strong> Patients with heart disease are, on average, older than those without. The “No Disease” group peaks more in younger decades.</p>
+                        <p><strong>How it helps answer our question:</strong> Confirms age is predictive, indicating demographic features carry useful signal for classification.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="agedist.png" alt="Age distribution by heart disease" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">3) Max Heart Rate (MaxHR) by Heart Disease</h5>
+                        <p><strong>Why I made it:</strong> MaxHR reflects cardiovascular capacity; we checked whether it separates the two groups.</p>
+                        <p><strong>What it shows:</strong> Patients with heart disease tend to achieve lower MaxHR, while those without reach higher values; medians and spreads differ.</p>
+                        <p><strong>How it helps answer our question:</strong> Demonstrates MaxHR is a strong predictor capturing reduced cardiovascular response.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="maxheartrate.png" alt="Max heart rate by heart disease" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">4) Oldpeak by Heart Disease</h5>
+                        <p><strong>Why I made it:</strong> Oldpeak measures ST depression during exercise, used clinically to detect ischemia.</p>
+                        <p><strong>What it shows:</strong> Patients with heart disease have higher Oldpeak values; distributions show a clear shift.</p>
+                        <p><strong>How it helps answer our question:</strong> Indicates Oldpeak is powerful for prediction and aligns with clinical reasoning.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="oldpeak.png" alt="Oldpeak by heart disease" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-1">
+                        <h5 class="mb-2">5) Cholesterol by Heart Disease</h5>
+                        <p><strong>Why I made it:</strong> Cholesterol is a known cardiovascular risk factor; we examined its predictive value here.</p>
+                        <p><strong>What it shows:</strong> There’s overlap, but patients with heart disease generally have slightly higher cholesterol; weaker than MaxHR/Oldpeak but a trend exists.</p>
+                        <p><strong>How it helps answer our question:</strong> Even weaker predictors add value when combined with stronger ones, improving overall accuracy.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="cholesterol.png" alt="Cholesterol by heart disease" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mt-3 mb-0"><strong>Overall connection to the central question:</strong> These visuals show meaningful medical and demographic patterns distinguishing patients with and without heart disease. With a balanced dataset and features like Age, MaxHR, and Oldpeak showing clear differences, models can learn to predict heart disease presence using these signals.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Modeling</strong> <i class="bi bi-cpu-fill text-secondary"></i></h3>
+                    <p>List and justify the classification algorithms evaluated. Provide brief explanations of each, including pros/cons.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Logistic Regression</strong> — linear baseline; interpretable coefficients.</li>
+                        <li class="list-group-item"><strong>Random Forest</strong> — non-linear; handles interactions; robust to scaling.</li>
+                        <li class="list-group-item"><strong>Gradient Boosting (e.g., XGBoost)</strong> — strong tabular performance; careful tuning.</li>
+                        <li class="list-group-item"><strong>SVM / k-NN (optional)</strong> — when margins/locality matter.</li>
+                    </ul>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Evaluation</strong> <i class="bi bi-clipboard2-check-fill text-success"></i></h3>
+                    <p>Report how well the models perform and why the chosen metrics fit the problem.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Accuracy, Precision, Recall, F1-Score</li>
+                        <li class="list-group-item">ROC-AUC and PR-AUC (for imbalanced classes)</li>
+                        <li class="list-group-item">Confusion matrix and classification report</li>
+                        <li class="list-group-item">Cross-validation strategy and variance discussion</li>
+                    </ul>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Storytelling</strong> <i class="bi bi-chat-dots-fill text-secondary"></i></h3>
+                    <p>Tell the narrative: key insights from modeling tied back to the original questions. State whether the questions were answered and what the results imply.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Impact</strong> <i class="bi bi-shield-exclamation text-danger"></i></h3>
+                    <p>Discuss social, ethical, and practical implications. Consider benefits, risks, fairness, privacy, and potential misuse. Reflect on limitations and safeguards.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>References</strong> <i class="bi bi-book-fill"></i></h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Dataset: <a href="#" target="_blank">Link to dataset</a></li>
+                        <li class="list-group-item">Algorithm docs: <a href="#" target="_blank">scikit-learn / XGBoost</a></li>
+                        <li class="list-group-item">Any papers, blogs, or tutorials referenced</li>
+                    </ul>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
+                    <h3 class="mb-3 text-center"><strong>Code</strong> <i class="bi bi-code-slash"></i></h3>
+                    <p>Attach or link the full notebook(s) for reproducibility. Include concise snippets above where helpful.</p>
+                    <p>👉 <a href="#" target="_blank">Project 2 GitHub Repository</a></p>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 bg-secondary py-1 my-5"></div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2023 Kyle Lunsford. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+    </script>
+</body>
+</html>
+
+
