@@ -174,49 +174,278 @@
 
                 <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
                     <h3 class="mb-4 text-center"><strong>Modeling</strong> <i class="bi bi-cpu-fill text-secondary"></i></h3>
-                    <p>List and justify the classification algorithms evaluated. Provide brief explanations of each, including pros/cons.</p>
-                    <ul class="list-group">
-                        <li class="list-group-item"><strong>Logistic Regression</strong> — linear baseline; interpretable coefficients.</li>
-                        <li class="list-group-item"><strong>Random Forest</strong> — non-linear; handles interactions; robust to scaling.</li>
-                        <li class="list-group-item"><strong>Gradient Boosting (e.g., XGBoost)</strong> — strong tabular performance; careful tuning.</li>
-                        <li class="list-group-item"><strong>SVM / k-NN (optional)</strong> — when margins/locality matter.</li>
-                    </ul>
+                    <p>To answer the question <em>“Can we predict whether a patient has heart disease from medical and demographic features?”</em> I experimented with several classification algorithms. Each model was chosen to bring a different perspective: some are simple and interpretable, while others are more complex and potentially more accurate. Comparing them allows us to weigh predictive performance against interpretability — a crucial trade-off in healthcare.</p>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">1) Logistic Regression</h5>
+                        <p><strong>Why I tried it:</strong> A classic baseline for binary classification, widely used in medicine, and interpretable.</p>
+                        <p><strong>How it works:</strong> Computes a weighted sum of input features and applies a sigmoid to produce a probability between 0 and 1.</p>
+                        <p class="mb-1"><strong>Pros:</strong> Fast, simple, interpretable; coefficients indicate risk factors.</p>
+                        <p class="mb-0"><strong>Cons:</strong> Assumes linear relationships; can underperform on complex, non-linear patterns.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="logistic.png" alt="Logistic Regression code" class="img-fluid rounded">
+                                <p class="text-muted small text-center mt-2">Code: Logistic Regression training and evaluation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">2) K-Nearest Neighbors (KNN)</h5>
+                        <p><strong>Why I tried it:</strong> Tests the intuition that patients with similar profiles share outcomes.</p>
+                        <p><strong>How it works:</strong> Classifies a new patient by the majority label among the <em>k</em> nearest neighbors in feature space.</p>
+                        <p class="mb-1"><strong>Pros:</strong> Easy to understand, non-parametric, can capture non-linear structure.</p>
+                        <p class="mb-0"><strong>Cons:</strong> Sensitive to feature scaling; requires tuning of <em>k</em>; slower on larger datasets.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="KNN.png" alt="KNN code" class="img-fluid rounded">
+                                <p class="text-muted small text-center mt-2">Code: KNN training and evaluation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">3) Decision Tree</h5>
+                        <p><strong>Why I tried it:</strong> Provides clear, rule-based predictions that clinicians can follow.</p>
+                        <p><strong>How it works:</strong> Recursively splits on features that best separate the classes (e.g., Age > 55, Oldpeak > 2.5) until a prediction is reached.</p>
+                        <p class="mb-1"><strong>Pros:</strong> Highly interpretable; handles numeric/categorical features; models non-linear boundaries.</p>
+                        <p class="mb-0"><strong>Cons:</strong> Prone to overfitting (especially deep trees); can be unstable to small data changes.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="DecionTree.png" alt="Decision Tree code" class="img-fluid rounded">
+                                <p class="text-muted small text-center mt-2">Code: Decision Tree training and evaluation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">4) Random Forest</h5>
+                        <p><strong>Why I tried it:</strong> A robust ensemble of many trees that usually outperforms a single tree and provides feature importance.</p>
+                        <p><strong>How it works:</strong> Trains many trees on random subsets of data and features; predictions are averaged.</p>
+                        <p class="mb-1"><strong>Pros:</strong> Strong accuracy; less overfitting than a single tree; feature importance insights.</p>
+                        <p class="mb-0"><strong>Cons:</strong> Less interpretable than one tree; slower to train and predict.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="RandomForest.png" alt="Random Forest code" class="img-fluid rounded">
+                                <p class="text-muted small text-center mt-2">Code: Random Forest training and evaluation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">5) Support Vector Machine (SVM)</h5>
+                        <p><strong>Why I tried it:</strong> Known for strong performance on medium-sized datasets; handles linear and non-linear boundaries.</p>
+                        <p><strong>How it works:</strong> Finds the hyperplane that maximizes the margin between classes; with an RBF kernel, captures non-linear patterns.</p>
+                        <p class="mb-1"><strong>Pros:</strong> High accuracy; effective in complex feature spaces.</p>
+                        <p class="mb-0"><strong>Cons:</strong> Sensitive to parameter choices; less interpretable; requires scaling.</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-12">
+                                <img src="SMV.png" alt="SVM code" class="img-fluid rounded">
+                                <p class="text-muted small text-center mt-2">Code: SVM training and evaluation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <h5 class="mb-2">Model Selection</h5>
+                        <p>After evaluating models on accuracy, precision, recall, and F1-score, the results were:</p>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item"><strong>SVM</strong>: ~90% accuracy (best performer)</li>
+                            <li class="list-group-item"><strong>Logistic Regression</strong>: ~89% accuracy</li>
+                            <li class="list-group-item"><strong>KNN</strong>: ~89% accuracy</li>
+                            <li class="list-group-item"><strong>Random Forest</strong>: ~87% accuracy</li>
+                            <li class="list-group-item"><strong>Decision Tree</strong>: ~80% accuracy</li>
+                        </ul>
+                        <p class="mb-0">While SVM achieved the highest accuracy, Logistic Regression and KNN were close. Logistic Regression stands out for interpretability — coefficients clarify how features like Age, MaxHR, and Oldpeak influence risk. However, since the primary goal was predictive accuracy, I selected <strong>SVM</strong> as the final model. It provided the most reliable predictions while confirming that simpler models like Logistic Regression remain strong, interpretable alternatives.</p>
+                    </div>
                 </section>
 
                 <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
                     <h3 class="mb-4 text-center"><strong>Evaluation</strong> <i class="bi bi-clipboard2-check-fill text-success"></i></h3>
-                    <p>Report how well the models perform and why the chosen metrics fit the problem.</p>
-                    <ul class="list-group">
-                        <li class="list-group-item">Accuracy, Precision, Recall, F1-Score</li>
-                        <li class="list-group-item">ROC-AUC and PR-AUC (for imbalanced classes)</li>
-                        <li class="list-group-item">Confusion matrix and classification report</li>
-                        <li class="list-group-item">Cross-validation strategy and variance discussion</li>
+                    <h5 class="mb-3">Metrics</h5>
+                    <p>To measure how well each model performed, I used several standard classification metrics:</p>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item"><strong>Accuracy</strong>: The overall proportion of correct predictions.</li>
+                        <li class="list-group-item"><strong>Precision</strong>: Of the patients predicted to have heart disease, how many truly had it.</li>
+                        <li class="list-group-item"><strong>Recall (Sensitivity)</strong>: Of all patients who actually had heart disease, how many the model correctly identified. This is especially important in healthcare, where missing a true case can be dangerous.</li>
+                        <li class="list-group-item"><strong>F1-score</strong>: The harmonic mean of precision and recall, giving a balanced measure of performance.</li>
                     </ul>
+                    <p>These metrics were chosen because relying only on accuracy can be misleading — for example, a model might appear “accurate” by favoring the majority class, but it could miss many true cases. Precision, recall, and F1-score provide a more complete picture of each model’s strengths and weaknesses.</p>
+
+                    <h5 class="mt-4 mb-3">Results</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Accuracy</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Logistic Regression</td>
+                                    <td>0.886</td>
+                                    <td>0.872</td>
+                                    <td>0.931</td>
+                                    <td>0.900</td>
+                                </tr>
+                                <tr>
+                                    <td>KNN</td>
+                                    <td>0.886</td>
+                                    <td>0.886</td>
+                                    <td>0.912</td>
+                                    <td>0.899</td>
+                                </tr>
+                                <tr>
+                                    <td>Decision Tree</td>
+                                    <td>0.799</td>
+                                    <td>0.816</td>
+                                    <td>0.824</td>
+                                    <td>0.820</td>
+                                </tr>
+                                <tr>
+                                    <td>Random Forest</td>
+                                    <td>0.875</td>
+                                    <td>0.883</td>
+                                    <td>0.892</td>
+                                    <td>0.888</td>
+                                </tr>
+                                <tr>
+                                    <td>SVM</td>
+                                    <td>0.902</td>
+                                    <td>0.882</td>
+                                    <td>0.951</td>
+                                    <td>0.915</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5 class="mt-4 mb-2">Discussion</h5>
+                    <p><strong>Best Performer (SVM):</strong> Support Vector Machine achieved the highest accuracy (90.2%) and recall (95.1%). High recall means it correctly identified almost all patients with heart disease, making it the strongest model for this dataset.</p>
+                    <p><strong>Close Contenders:</strong> Logistic Regression and KNN both achieved strong results (88.6% accuracy, ~90% F1-scores). Logistic Regression has the advantage of being interpretable, while KNN is less interpretable but conceptually simple.</p>
+                    <p><strong>Random Forest:</strong> Achieved 87.5% accuracy with balanced precision and recall. While slightly lower than SVM and Logistic Regression, it offered useful feature importance insights.</p>
+                    <p><strong>Decision Tree:</strong> Performed the weakest (79.9% accuracy), highlighting its tendency to overfit.</p>
+
+                    <h5 class="mt-3 mb-2">Conclusion</h5>
+                    <p class="mb-0">Based on the evaluation, <strong>Support Vector Machine (SVM)</strong> was selected as the final model. It provided the highest accuracy, precision, recall, and F1-score, making it the most reliable choice for predicting heart disease in this dataset. That said, <strong>Logistic Regression</strong> remains an important alternative because of its interpretability. In healthcare, being able to explain why a patient is at risk can be just as critical as achieving high predictive accuracy.</p>
                 </section>
 
                 <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
                     <h3 class="mb-4 text-center"><strong>Storytelling</strong> <i class="bi bi-chat-dots-fill text-secondary"></i></h3>
-                    <p>Tell the narrative: key insights from modeling tied back to the original questions. State whether the questions were answered and what the results imply.</p>
+                    <h5 class="mb-2">The Central Question</h5>
+                    <p><strong>Can we predict whether a patient has heart disease based on their medical and demographic features?</strong></p>
+                    <p>Through data exploration, modeling, and evaluation, several important insights emerged.</p>
+
+                    <h5 class="mt-3 mb-2">Patterns in the Data</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Age</strong>: Patients with heart disease were, on average, older than those without.</li>
+                        <li class="list-group-item"><strong>Max Heart Rate</strong>: Those with heart disease tended to achieve lower maximum heart rates during exercise.</li>
+                        <li class="list-group-item"><strong>Oldpeak</strong>: Higher ST depression (Oldpeak) was strongly associated with heart disease.</li>
+                        <li class="list-group-item"><strong>Cholesterol</strong>: While cholesterol levels showed overlap, patients with heart disease were slightly more likely to have elevated cholesterol.</li>
+                    </ul>
+                    <p>These patterns showed that medical and demographic features indeed contain strong signals that can help identify risk.</p>
+
+                    <h5 class="mt-3 mb-2">What the Models Taught Us</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Logistic Regression</strong> gave a clear, interpretable baseline.</li>
+                        <li class="list-group-item"><strong>KNN</strong> demonstrated that patients with similar profiles often share outcomes.</li>
+                        <li class="list-group-item"><strong>Decision Trees</strong> showed rule-based prediction but also how easily they can overfit.</li>
+                        <li class="list-group-item"><strong>Random Forest</strong> highlighted the value of ensembles to avoid overfitting.</li>
+                        <li class="list-group-item"><strong>SVM</strong> achieved the highest accuracy and recall, showing the strength of nonlinear separation.</li>
+                    </ul>
+                    <p>The results confirmed that machine learning can effectively predict heart disease, and they underscored the importance of choosing the right model for the balance between accuracy and interpretability.</p>
+
+                    <h5 class="mt-3 mb-2">Answering the Central Question</h5>
+                    <p><strong>Yes</strong> — the project demonstrated that it is possible to predict whether a patient has heart disease from their health and demographic data. The best-performing model (SVM) reached about 90% accuracy, while Logistic Regression and KNN were close behind at ~89%.</p>
+                    <p>This means that, with relatively simple patient features like age, chest pain type, max heart rate, and exercise-induced angina, we can build models that are highly predictive of heart disease.</p>
+
+                    <h5 class="mt-3 mb-2">Key Takeaways</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Machine learning can enhance early detection</strong>: Predictive models can help identify at-risk patients before more invasive or costly testing.</li>
+                        <li class="list-group-item"><strong>Interpretability matters</strong>: While SVM was the best performer, Logistic Regression’s interpretability makes it particularly valuable in healthcare.</li>
+                        <li class="list-group-item"><strong>No single feature is enough</strong>: It’s the combination of factors (age, exercise results, cholesterol, blood pressure, etc.) that makes predictions powerful.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">The Story</h5>
+                    <p>The story this data tells is both hopeful and cautionary. On one hand, modern machine learning techniques can predict heart disease with impressive accuracy. On the other hand, different models emphasize different aspects — some focus on interpretability, others on pure accuracy. Together, they show that machine learning is not about replacing medical expertise, but about providing another tool to support it.</p>
+                    <p class="mb-0">In the end, the models answered the question: Yes, heart disease can be predicted using patient data — with accuracy around 90%. The challenge is deciding how to balance predictive power with transparency, ensuring that these tools serve both doctors and patients responsibly.</p>
                 </section>
 
                 <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
                     <h3 class="mb-4 text-center"><strong>Impact</strong> <i class="bi bi-shield-exclamation text-danger"></i></h3>
-                    <p>Discuss social, ethical, and practical implications. Consider benefits, risks, fairness, privacy, and potential misuse. Reflect on limitations and safeguards.</p>
+                    <p>Building a model to predict heart disease risk has real social and ethical stakes. Below are potential benefits, risks, and concrete safeguards I would use if deploying this beyond a class project.</p>
+
+                    <h5 class="mt-3 mb-2">Potential Benefits</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Earlier detection & triage</strong>: Higher-risk patients can be flagged for timely follow-up (stress tests, cardiology referral).</li>
+                        <li class="list-group-item"><strong>Resource allocation</strong>: Clinics with limited capacity can prioritize patients more fairly and systematically.</li>
+                        <li class="list-group-item"><strong>Clinical insight</strong>: Feature importance/coefficients highlight factors (e.g., Oldpeak, MaxHR, age) that merit attention in prevention strategies.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">Risks & Possible Harms</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>False negatives (missed cases)</strong>: A “reassuring” prediction may delay care—harmful in a high-stakes setting.</li>
+                        <li class="list-group-item"><strong>False positives (over-alerting)</strong>: Unnecessary tests, anxiety, and costs—especially problematic for under‑insured patients.</li>
+                        <li class="list-group-item"><strong>Automation bias</strong>: Clinicians might over‑trust the model even when it conflicts with clinical judgment.</li>
+                        <li class="list-group-item"><strong>Dataset bias & generalizability</strong>: If training data underrepresents certain demographics or contexts, predictions may be less accurate for those groups.</li>
+                        <li class="list-group-item"><strong>Stigmatization & discrimination</strong>: Risk scores could be misused by payers/employers/insurers if not governed properly.</li>
+                        <li class="list-group-item"><strong>Privacy & security</strong>: Health data is highly sensitive; breaches can cause concrete harms.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">Equity & Fairness Considerations</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Subgroup performance</strong>: Evaluate accuracy/recall/F1 across sex, age bands, and other demographics; “90% overall” is insufficient if a subgroup fares worse.</li>
+                        <li class="list-group-item"><strong>Thresholds by context</strong>: In ED triage, prioritize recall; in screening, tune for higher precision. Consider transparent subgroup‑specific thresholds where justified.</li>
+                        <li class="list-group-item"><strong>Bias mitigation</strong>: If disparities appear, try reweighting, group‑aware calibration, or data augmentation—then re‑audit.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">Privacy & Security</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Data minimization</strong>: Use only features necessary for prediction; avoid identifiers.</li>
+                        <li class="list-group-item"><strong>Protection</strong>: Encrypt data at rest/in transit; restrict access; log audits.</li>
+                        <li class="list-group-item"><strong>Governance</strong>: Comply with health data regulations; document data lineage and consent.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">Human Factors & Workflow</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Decision support, not replacement</strong>: Present predictions with explanations (top contributing features) and uncertainty.</li>
+                        <li class="list-group-item"><strong>Clear UI</strong>: Show why the model flagged the case; link to relevant guidelines; reduce alert fatigue.</li>
+                        <li class="list-group-item"><strong>Accountability</strong>: Define who reviews overrides, how disagreements are resolved, and how patient feedback is incorporated.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">Responsible Deployment Plan</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Prospective validation at the clinic that will use it (not just train/test split).</li>
+                        <li class="list-group-item">Calibration checks (overall and by subgroup) to ensure predicted risks match observed outcomes.</li>
+                        <li class="list-group-item">Model card & documentation covering data sources, intended use, limits, and known failure modes.</li>
+                        <li class="list-group-item">Monitoring & drift detection: Track performance over time; set rollback criteria.</li>
+                        <li class="list-group-item">Periodic fairness audits with stakeholder review (clinicians, quality, patient reps).</li>
+                        <li class="list-group-item">Secure MLOps with versioning, audit trails, and reproducibility.</li>
+                    </ul>
+
+                    <h5 class="mt-3 mb-2">Bottom Line</h5>
+                    <p class="mb-0">This project shows that machine learning can meaningfully aid early heart‑disease risk identification. But real‑world use must balance accuracy with equity, transparency, and patient safety—treating the model as a clinical aid, not an oracle—and backing it with privacy safeguards, subgroup audits, and continuous monitoring.</p>
                 </section>
 
                 <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
                     <h3 class="mb-4 text-center"><strong>References</strong> <i class="bi bi-book-fill"></i></h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">Dataset: <a href="#" target="_blank">Link to dataset</a></li>
-                        <li class="list-group-item">Algorithm docs: <a href="#" target="_blank">scikit-learn / XGBoost</a></li>
-                        <li class="list-group-item">Any papers, blogs, or tutorials referenced</li>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Kaggle. Heart Failure Prediction Dataset. Available at: <a href="https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction" target="_blank">https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction</a></li>
                     </ul>
+
+                    <h5 class="mt-2 mb-2">Tools Used</h5>
+                    <p class="mb-0">ChatGPT (OpenAI, 2025) was used to clean up writing for clarity and flow, provide guidance on project structure, and assist with debugging code issues (such as preprocessing, model implementation, and evaluation setup).</p>
                 </section>
 
                 <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
                     <h3 class="mb-3 text-center"><strong>Code</strong> <i class="bi bi-code-slash"></i></h3>
-                    <p>Attach or link the full notebook(s) for reproducibility. Include concise snippets above where helpful.</p>
-                    <p>👉 <a href="#" target="_blank">Project 2 GitHub Repository</a></p>
+                    <div class="my-2">
+                        <a href="https://github.com/klunsfo7/Project_1" target="_blank" class="btn btn-dark"><i class="bi bi-github me-1"></i> GitHub Repository</a>
+                    </div>
                 </section>
             </div>
         </div>
