@@ -51,19 +51,51 @@
         </div>
         
         <h2 class="text-center my-4">Featured Projects</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="Flight_Data.jpeg" class="card-img-top" alt="Project 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Project 1: Airport Delay Analysis</h5>
-                        <p class="card-text">Exploring flight delays across airports.</p>
-                        <a href="project1.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more project cards here as needed -->
-        </div>
+        <div class="row" id="featured-projects"></div>
+        <script>
+            // Configure your projects list here. Newest projects should have later dates.
+            const allProjects = [
+                {
+                    title: 'Project 2: Heart Disease Prediction',
+                    date: '2025-09-20',
+                    description: 'Predicting heart disease using medical and demographic features.',
+                    image: 'Heart_Image.jpg',
+                    link: 'project2.html'
+                },
+                {
+                    title: 'Project 1: Airport Delay Analysis',
+                    date: '2025-08-01',
+                    description: 'Exploring flight delays across airports.',
+                    image: 'Flight_Data.jpeg',
+                    link: 'project1.html'
+                }
+                // Add new projects here with a proper ISO date (YYYY-MM-DD)
+            ];
+
+            const featuredRow = document.getElementById('featured-projects');
+            if (featuredRow) {
+                const newest = allProjects
+                    .slice()
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 3);
+
+                newest.forEach(project => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    col.innerHTML = `
+                        <div class="card mb-4 h-100">
+                            <img src="${project.image}" class="card-img-top" alt="${project.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${project.title}</h5>
+                                <p class="card-text">${project.description}</p>
+                                <a href="${project.link}" class="btn btn-primary">View Project</a>
+                            </div>
+                        </div>
+                    `;
+                    featuredRow.appendChild(col);
+                });
+            }
+        </script>
         
         <div class="text-center my-5">
             <a href="portfolio.html" class="btn btn-outline-primary btn-lg">View All Projects</a>
