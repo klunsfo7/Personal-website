@@ -89,6 +89,7 @@
                     <p><strong>Deduplication</strong>: I removed duplicate rows to ensure that no patient records were counted more than once. Although the dataset did not contain missing values, I confirmed this by checking each column. This step was important because missing or duplicated information can bias results and reduce the reliability of the model.</p>
                     <p><strong>Encoding categorical features</strong>: Since the dataset contained both numerical and categorical features, I encoded the categorical variables so they could be used by machine learning algorithms. Features such as <em>Sex</em>, <em>ChestPainType</em>, <em>RestingECG</em>, <em>ExerciseAngina</em>, and <em>ST_Slope</em> were converted using one-hot encoding. This transformation allows each category to be represented numerically without introducing ordinal bias. For example, “Male” and “Female” in the <em>Sex</em> column were converted into binary indicator variables.</p>
                     <p><strong>Post-encoding checks</strong>: After encoding, I performed basic checks to confirm that the target variable (<code>HeartDisease</code>) remained balanced and that all features were represented correctly. This ensured that no information was lost in the transformation process and that the dataset was ready for analysis.</p>
+                    <p><strong>Scaling and data splits</strong>: Numeric features were scaled and the data was split into train, validation, and test sets to avoid leakage and ensure fair evaluation—especially important for KNN and SVM, which are sensitive to feature scales.</p>
                     <p><strong>Persisting the cleaned data</strong>: Finally, I saved the cleaned version of the dataset as a new CSV file. This ensures that all later steps in the project, including visualizations and modeling, are based on the same consistent and preprocessed data. By cleaning and encoding the dataset up front, I reduced the risk of errors and created a reliable foundation for exploring patterns and building classification models.</p>
 
                     <div class="row g-3 my-3">
@@ -146,25 +147,25 @@
                     </div>
 
                     <div class="mb-4">
-                        <h5 class="mb-2">4) Oldpeak by Heart Disease</h5>
-                        <p><strong>Why I made it:</strong> Oldpeak measures ST depression during exercise, used clinically to detect ischemia.</p>
-                        <p><strong>What it shows:</strong> Patients with heart disease have higher Oldpeak values; distributions show a clear shift.</p>
-                        <p><strong>How it helps answer our question:</strong> Indicates Oldpeak is powerful for prediction and aligns with clinical reasoning.</p>
+                        <h5 class="mb-2">4) Oldpeak — Jittered Points by Heart Disease</h5>
+                        <p><strong>Why I made it:</strong> Oldpeak (ST depression) is a direct measure from exercise ECG tests, often linked to ischemia. I wanted to visualize the full spread of values for patients with and without heart disease, without losing individual observations.</p>
+                        <p><strong>What it shows:</strong> Patients without heart disease (blue) are tightly clustered around an Oldpeak of 0, showing very little ST depression. In contrast, patients with heart disease (orange) are much more spread out, with many having higher Oldpeak values. The jittering makes the density of points clear and avoids overlap.</p>
+                        <p><strong>How it helps answer our question:</strong> This confirms that ST depression is much more common and more severe in patients with heart disease, making Oldpeak a strong and clinically meaningful predictor for classification.</p>
                         <div class="row g-3 my-2">
                             <div class="col-12">
-                                <img src="oldpeak.png" alt="Oldpeak by heart disease" class="img-fluid rounded">
+                                <img src="OldPeak.png" alt="Oldpeak — Jittered Points by Heart Disease" class="img-fluid rounded">
                             </div>
                         </div>
                     </div>
 
                     <div class="mb-1">
-                        <h5 class="mb-2">5) Cholesterol by Heart Disease</h5>
-                        <p><strong>Why I made it:</strong> Cholesterol is a known cardiovascular risk factor; we examined its predictive value here.</p>
-                        <p><strong>What it shows:</strong> There’s overlap, but patients with heart disease generally have slightly higher cholesterol; weaker than MaxHR/Oldpeak but a trend exists.</p>
-                        <p><strong>How it helps answer our question:</strong> Even weaker predictors add value when combined with stronger ones, improving overall accuracy.</p>
+                        <h5 class="mb-2">5) Cholesterol — Mean with 95% CI</h5>
+                        <p><strong>Why I made it:</strong> Cholesterol is a well-known cardiovascular risk factor, but boxplots made it hard to interpret because of extreme outliers. Using means with confidence intervals provides a clearer comparison of group averages.</p>
+                        <p><strong>What it shows:</strong> On average, cholesterol levels are lower in patients with heart disease compared to those without. The confidence intervals show some uncertainty, but the drop between groups is visible. This suggests cholesterol may not separate groups as strongly as expected, though there is still a signal.</p>
+                        <p><strong>How it helps answer our question:</strong> The result shows cholesterol alone may not perfectly distinguish heart disease status, but it still carries predictive information when combined with other features. This highlights the importance of multivariable modeling rather than relying on cholesterol by itself.</p>
                         <div class="row g-3 my-2">
                             <div class="col-12">
-                                <img src="cholesterol.png" alt="Cholesterol by heart disease" class="img-fluid rounded">
+                                <img src="Cholesterol.png" alt="Cholesterol — Mean with 95% CI" class="img-fluid rounded">
                             </div>
                         </div>
                     </div>
