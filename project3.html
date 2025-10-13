@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3 - Kyle Lunsford's Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Kyle Lunsford</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section text-center py-4 mb-4" style="background: url('https://via.placeholder.com/1920x400?text=Project+3+Hero') no-repeat center center/cover; color: white;">
+        <div class="container">
+            <h1 class="display-4" data-aos="fade-down">Project 3: Title Placeholder</h1>
+            <p class="lead" data-aos="fade-up">A brief sentence describing the project focus.</p>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 mb-5 text-center bg-light text-dark py-3 rounded">Project Three</h1>
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Problem</strong> <i class="bi bi-exclamation-triangle-fill text-warning"></i></h3>
+                    <p>Housing prices affect everything from personal finances to city planning, and estimating a home’s value is a core task for buyers, sellers, lenders, and appraisers. With today’s rich property data, we can ask a practical question: <strong>Can we predict a home’s sale price from its physical characteristics and location-related features?</strong></p>
+                    <p>This project explores that question using the Kaggle <a href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview" target="_blank">House Prices: Advanced Regression Techniques</a> dataset. It includes detailed residential properties from Ames, Iowa, with features such as lot size, neighborhood, overall material/finish quality, year built and remodeled, basement and above-ground living areas, number of bathrooms and bedrooms, garage capacity, and more. By analyzing patterns across these features and training predictive models, the goal is to understand which factors matter most—and how accurately we can estimate a home’s SalePrice.</p>
+                    <p>For evaluation, we will follow the competition’s approach and use Root Mean Squared Error (RMSE) (on log-transformed prices when appropriate). The data are provided in two files:</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><code>train.csv</code> — includes both features and the target <code>SalePrice</code>.</li>
+                        <li class="list-group-item"><code>test.csv</code> — includes the same features without the target; predictions on this file can be submitted to Kaggle for a public score.</li>
+                    </ul>
+                    <p>The purpose is not only to measure model performance but also to reflect on broader implications. If machine learning can estimate sale prices well, it could help streamline valuations and provide transparency for buyers and sellers. However, it also raises questions about fairness and bias (e.g., neighborhood effects), explainability (why a model priced a home a certain way), and data drift (how changing markets can degrade a model over time). We will keep these considerations in mind as we build and evaluate our models.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>What is regression and how does it work</strong> <i class="bi bi-graph-up text-primary"></i></h3>
+                    <p>Regression is a supervised learning approach for predicting a continuous value. In this project, that value is a home’s <code>SalePrice</code>. We train on many past sales where features (lot size, quality, square footage, year built, neighborhood, etc.) and the final price are known. The model learns patterns that map features → price, then we test how well it predicts prices for new homes.</p>
+
+                    <h5 class="mt-3">Linear Regression (required baseline)</h5>
+                    <p>Linear regression estimates price as a weighted combination of the input features plus an intercept (baseline). Each weight shows how much that feature tends to move the price when other features are held fixed. We’ll use scikit-learn’s <code>LinearRegression</code> as our starting point.</p>
+
+                    <h5 class="mt-3">Why preprocessing matters here</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Handle missing values (e.g., median for numeric, most frequent for categorical).</li>
+                        <li class="list-group-item">Encode categoricals (e.g., one-hot encoding) so the model can use them.</li>
+                        <li class="list-group-item">Tame skew/outliers (often log-transforming areas and using log(<code>SalePrice</code>) for stability).</li>
+                        <li class="list-group-item">Optionally standardize numeric inputs (especially helpful for some regularized linear models).</li>
+                    </ul>
+
+                    <h5 class="mt-3">How we’ll measure success</h5>
+                    <p>We’ll evaluate with Root Mean Squared Error (RMSE), aligned with the competition’s metric (often computed on log prices). Lower RMSE means more accurate price estimates. We’ll keep this metric consistent across experiments so improvements are easy to compare.</p>
+
+                    <h5 class="mt-3">Limitations to keep in mind</h5>
+                    <ul class="list-group mb-0">
+                        <li class="list-group-item">Relationships might not be perfectly linear; we may need transformations or different models.</li>
+                        <li class="list-group-item">Some features can be redundant (multicollinearity), which can blur individual effects.</li>
+                        <li class="list-group-item">Housing markets shift over time, so models can drift without updates.</li>
+                    </ul>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Experiment 1: Data Understanding</strong> <i class="bi bi-clipboard-data text-info"></i></h3>
+                    <p><strong>Goal.</strong> Before modeling, I want a high-level picture of the data: what the target looks like, which features might matter, where missing values live, and whether there are outliers or obvious data-quality quirks that could mislead a regression model.</p>
+
+                    <h5 class="mt-3">Dataset shape & target</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><code>train.csv</code>: 1,460 homes, 81 columns (including <code>SalePrice</code>).</li>
+                        <li class="list-group-item"><code>test.csv</code>: 1,459 homes, 80 columns (same features, no <code>SalePrice</code>).</li>
+                    </ul>
+                    <p class="mb-3">Target (<code>SalePrice</code>) is continuous and typically right-skewed (a few very expensive homes). I plan to consider <code>log(SalePrice)</code> during evaluation/modeling to reduce skew and stabilize variance.</p>
+
+                    <h5 class="mt-3">First pass checks I will run</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Missingness map</strong>: Identify features with substantial missing values (e.g., some basement/garage/porch attributes can be missing when the feature doesn’t exist). Distinguish between true missing vs. not applicable.</li>
+                        <li class="list-group-item"><strong>Dtypes overview</strong>: Split into numeric vs categorical features. Numeric includes areas, counts, years; categorical includes neighborhood, exterior materials, quality/condition categories, etc.</li>
+                        <li class="list-group-item"><strong>Basic sanity checks</strong>:
+                            <ul class="mb-0 mt-2">
+                                <li>Non-negative areas (e.g., <code>LotArea</code>, <code>GrLivArea</code>, <code>TotalBsmtSF</code>).</li>
+                                <li>Reasonable year ranges (<code>YearBuilt</code>, <code>YearRemodAdd</code>, <code>YrSold</code>).</li>
+                                <li>Counts within sensible bounds (e.g., bathrooms, bedrooms, garage cars).</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h5 class="mt-3">Target & key feature relationships (what I expect to see)</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Overall quality (<code>OverallQual</code>)</strong>: Typically one of the strongest single predictors; higher quality ↔ higher prices.</li>
+                        <li class="list-group-item"><strong>Size measures</strong>: <code>GrLivArea</code> and <code>TotalBsmtSF</code> often correlate strongly with price; total space tends to matter.</li>
+                        <li class="list-group-item"><strong>Garage capacity/area</strong>: <code>GarageCars</code> and <code>GarageArea</code> add signal (capacity tends to be cleaner than raw area).</li>
+                        <li class="list-group-item"><strong>Age & updates</strong>: <code>YearBuilt</code>, <code>YearRemodAdd</code> (and “age at sale”) can relate to price; newer or recently remodeled homes may command higher prices.</li>
+                        <li class="list-group-item"><strong>Location proxy</strong>: <code>Neighborhood</code> often captures location-driven price differences.</li>
+                    </ul>
+
+                    <h5 class="mt-3">I’ll quantify these with:</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Correlation heatmap (numeric only) to spot top numeric predictors (e.g., <code>OverallQual</code>, <code>GrLivArea</code>, <code>GarageCars</code>, <code>TotalBsmtSF</code>, <code>YearBuilt</code>).</li>
+                        <li class="list-group-item">Box/violin plots of price by categoricals (e.g., <code>Neighborhood</code>, <code>OverallQual</code>, <code>HouseStyle</code>) to see separability across groups.</li>
+                        <li class="list-group-item">Scatter plots (price vs <code>GrLivArea</code>, <code>TotalBsmtSF</code>, etc.) to see trend shape and potential heteroscedasticity.</li>
+                    </ul>
+
+                    <h5 class="mt-3">Outliers & influential points</h5>
+                    <p class="mb-3">Known pattern in this dataset: a few homes with very large <code>GrLivArea</code> but relatively low price can act as influential outliers for linear models. I’ll visualize price vs. <code>GrLivArea</code> (both raw and log-price) and consider robust handling later (e.g., transformations, robust models, or careful outlier policy).</p>
+
+                    <h5 class="mt-3">Collinearity & redundancy</h5>
+                    <p class="mb-2">Space/size features can be correlated (e.g., <code>GarageArea</code> vs <code>GarageCars</code>, or multiple porch/basement sub-areas). I’ll watch for multicollinearity, as it can destabilize linear coefficients, and plan to:</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Prefer cleaner proxies (e.g., <code>GarageCars</code> over <code>GarageArea</code>) when two features convey the same signal.</li>
+                        <li class="list-group-item">Consider combining related features into a single engineered metric (e.g., total square footage).</li>
+                    </ul>
+
+                    <h5 class="mt-3">Train vs. test alignment (data leakage guardrails)</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Compare feature distributions between train and test (especially categoricals like <code>Neighborhood</code>) to ensure encodings align and to avoid using any information from test during training (no peeking at the target, no target-based transforms).</li>
+                        <li class="list-group-item">All preprocessing steps will be fit on training data only and then applied to validation/test.</li>
+                    </ul>
+
+                    <h5 class="mt-3">Visuals I plan to include (in the notebook/blog)</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Target shape: histogram of <code>log(1 + SalePrice)</code>.</li>
+                        <li class="list-group-item">Missingness: top 12 features by % missing + quick table.</li>
+                        <li class="list-group-item">Relationship: <code>log(SalePrice)</code> vs <code>GrLivArea</code> (size).</li>
+                        <li class="list-group-item">Relationship: price by quality (<code>OverallQual</code> boxplot).</li>
+                        <li class="list-group-item">Quick signal check: top 10 numeric correlations with <code>SalePrice</code> (bar chart).</li>
+                    </ul>
+
+                    <h5 class="mt-3">Outcome of this step</h5>
+                    <p class="mb-3">A prioritized list of promising features, a short list of risky/outlier patterns, and a concrete preprocessing plan for Experiment 1 (impute missing values, one-hot encode categoricals, and consider log-transforming the target). This sets up the baseline model fairly and transparently.</p>
+
+                    <h5 class="mt-4">Experiment 1 Visuals</h5>
+                    <div class="mb-4" data-aos="fade-up">
+                        <h6 class="mb-2">Figure 1: Target shape — log(1 + SalePrice) histogram</h6>
+                        <img src="images/one.png" alt="Histogram of log(1 + SalePrice)" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">Log1p transform reduces skew and stabilizes variance.</p>
+                    </div>
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <h6 class="mb-2">Figure 2: Missingness — top 12 features by % missing</h6>
+                        <img src="images/Two.png" alt="Top 12 features by percent missing" class="img-fluid rounded mb-2">
+                       
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <h6 class="mb-2">Figure 3: Relationship — log-price vs size (GrLivArea)</h6>
+                        <img src="images/Three.png" alt="log(SalePrice) vs GrLivArea scatter" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">Trend shape and potential heteroscedasticity; watch for influential outliers.</p>
+                    </div>
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <h6 class="mb-2">Figure 4: Relationship — price by quality (OverallQual boxplot)</h6>
+                        <img src="images/Four.png" alt="SalePrice by OverallQual boxplot" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">Higher quality homes typically command higher prices.</p>
+                    </div>
+                    <div class="mb-0" data-aos="fade-up" data-aos-delay="400">
+                        <h6 class="mb-2">Figure 5: Quick signal check — top 10 numeric correlations</h6>
+                        <img src="images/Five.png" alt="Top 10 numeric correlations with SalePrice (bar chart)" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">Bar chart of strongest numeric correlations with SalePrice.</p>
+                    </div>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Experiment 1 — Pre-processing</strong> <i class="bi bi-gear-fill text-success"></i></h3>
+                    <p><strong>Goal.</strong> Prepare a clean, model-ready table with minimal but sensible steps so the baseline is fair and reproducible.</p>
+
+                    <h5 class="mt-3">What needs to happen after data understanding</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Separate target & drop identifiers</strong>
+                            <ul class="mb-0 mt-2">
+                                <li>Target: <code>SalePrice</code> (will use log transform for modeling).</li>
+                                <li>Drop <code>Id</code> from features (identifier only).</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item"><strong>Handle missing values (nulls vs. “not applicable”)</strong>
+                            <ul class="mb-0 mt-2">
+                                <li>Numeric features: median imputation (robust to skew/outliers).</li>
+                                <li>Categorical features: most-frequent imputation.</li>
+                                <li>Note: Some fields are “missing because the feature doesn’t exist” (e.g., no basement/garage). For baseline simplicity, still impute them; one-hot encoding will capture “no feature” as its own level where appropriate.</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item"><strong>Transform features to numeric</strong>
+                            <ul class="mb-0 mt-2">
+                                <li>Apply one-hot encoding to all categorical columns.</li>
+                                <li>Use <code>handle_unknown='ignore'</code> so unseen categories in validation/test don’t break the pipeline.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h5 class="mt-3">Target transformation</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Model on <code>log(1 + SalePrice)</code> to reduce right-skew and align with the competition’s log-RMSE style evaluation.</li>
+                        <li class="list-group-item">At prediction time, convert back with <code>expm1</code> for dollar-RMSE reporting or Kaggle submission.</li>
+                    </ul>
+
+                    <h5 class="mt-3">Feature set for the first experiment (keep it broad)</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Use all available features except <code>Id</code> and the target.</li>
+                        <li class="list-group-item">Rationale: for a baseline, broad coverage + one-hot lets the model find signal without premature pruning. We’ll consider pruning/engineering later.</li>
+                    </ul>
+
+                    <h5 class="mt-3">What I’m not doing yet (by design)</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">No scaling (OLS doesn’t require it; we’ll revisit for regularized models).</li>
+                        <li class="list-group-item">No outlier removal (keeps baseline honest; we’ll reassess after we see residuals).</li>
+                        <li class="list-group-item">No engineered features yet (e.g., <code>TotalSF</code>, <code>AgeAtSale</code>), saving these for Experiment 3.</li>
+                    </ul>
+
+                    <h5 class="mt-3">Why these choices</h5>
+                    <ul class="list-group mb-0">
+                        <li class="list-group-item">Median/mode imputation + one-hot is a simple, reliable starting point for mixed-type tabular data.</li>
+                        <li class="list-group-item">Log-transforming the target typically stabilizes variance and makes errors more comparable across cheap vs. expensive homes.</li>
+                        <li class="list-group-item">Using all features prevents discarding valuable signal too early; later experiments will test regularization, feature engineering, or selection.</li>
+                    </ul>
+                </section>
+
+    
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Experiment 1 — Modeling (Linear Regression)</strong> <i class="bi bi-cpu-fill text-secondary"></i></h3>
+                    <p><strong>Goal.</strong> Build a simple, fair baseline model.</p>
+                    <p><strong>Model.</strong> I used Linear Regression (ordinary least squares) from scikit-learn. The model is wrapped in a pipeline that applies the Experiment 1 preprocessing (median imputation for numeric features, most-frequent imputation + one-hot encoding for categoricals), then fits a linear model on the log-transformed target <code>log(1 + SalePrice)</code>. I trained with an 80/20 train–validation split and a fixed random seed for reproducibility. I did not tune hyperparameters in this baseline; the goal was to establish a transparent starting point before adding regularization or feature engineering in later experiments.</p>
+                    <p class="mb-0"><strong>Why linear first?</strong> Linear regression is fast, interpretable, and gives a strong baseline on tabular data. Using the log target stabilizes variance and aligns with the competition’s log-RMSE evaluation style.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Experiment 1 — Evaluation</strong> <i class="bi bi-clipboard2-check-fill text-success"></i></h3>
+                    <h5 class="mb-2">Metric</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>log-RMSE (validation)</strong> — error measured in log-price space (matches Kaggle’s scoring style).</li>
+                        <li class="list-group-item"><strong>RMSE in dollars (validation)</strong> — predictions inverted back to dollars for an intuitive sense of average error.</li>
+                    </ul>
+                    <h5 class="mb-2">Results</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Validation log-RMSE: <strong>0.13846</strong> </li>
+                        <li class="list-group-item">Validation RMSE (USD): <strong>$[25,418]</strong></li>
+                        <li class="list-group-item">Kaggle public score (log-RMSE): <strong>0.13846</strong></li>
+                    </ul>
+                    <h5 class="mb-2">Interpretation</h5>
+                    <p>A log-RMSE of ~0.138 implies roughly 14–15% typical relative error, which is a strong baseline for this dataset. The model already captures core signals (overall quality, living area, etc.) with minimal preprocessing.</p>
+                    <h5 class="mb-2">Limitations & next steps</h5>
+                    <p class="mb-0">Coefficients in a plain linear model can be sensitive to multicollinearity and skewed features, and high-cardinality categoricals can increase sparsity. In the next experiments I’ll add regularization (Ridge/Lasso), consider standardizing numeric features, handle skewed variables more deliberately, and introduce feature engineering (e.g., total square footage, age at sale) to see if I can improve on this baseline.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Experiment 2 — Regularized Linear (Ridge) + Skew Fix + Standardization</strong> <i class="bi bi-sliders"></i></h3>
+                    <p><strong>Goal.</strong> Improve generalization over the baseline OLS by reducing overfitting and taming skew.</p>
+
+                    <h5 class="mt-3">What changed vs. Experiment 1</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Regularization</strong>: Switch from plain OLS to Ridge (L2). This shrinks coefficients on noisy/high-dimensional one-hot features and combats multicollinearity.</li>
+                        <li class="list-group-item"><strong>Skew fixes (numeric subset)</strong>: Apply <code>log1p</code> to highly right-skewed numeric features (areas) so their effect is more linear and less dominated by extreme values.</li>
+                        <li class="list-group-item"><strong>Standardization</strong>: After one-hot expansion, apply a <code>StandardScaler(with_mean=false)</code> to the whole sparse design matrix so Ridge treats features on comparable scales.</li>
+                        <li class="list-group-item"><strong>Same target</strong>: Train on <code>log(1 + SalePrice)</code> and report log-RMSE (plus $ RMSE).</li>
+                    </ul>
+
+                    <h5 class="mt-3">Why this helps</h5>
+                    <p>Ridge reduces variance from many correlated/expanded features; log-transforming skewed inputs makes linear relationships more linear; standardization matters because ridge penalties are scale‑dependent.</p>
+
+                    <h5 class="mt-3">Expected outcome</h5>
+                    <ul class="list-group mb-0">
+                        <li class="list-group-item">Validation log-RMSE should typically beat the baseline (~0.13846) by a noticeable margin.</li>
+                        <li class="list-group-item">Coefficients are more stable; less overfit to rare categories.</li>
+                    </ul>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Experiment 2 — Results & How They Compare to Experiment 1</strong> <i class="bi bi-graph-up"></i></h3>
+
+                    <h5 class="mb-2">Score</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Validation/Kaggle-style log-RMSE: <strong>0.13342</strong></li>
+                        <li class="list-group-item">Baseline (Exp 1) log-RMSE: <strong>0.13846</strong></li>
+                    </ul>
+
+                    <h5 class="mb-2">Change vs. Exp 1</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Absolute improvement: <strong>0.00504</strong> lower log-RMSE.</li>
+                        <li class="list-group-item">Relative improvement: <strong>~3.64%</strong> better than the baseline.</li>
+                        <li class="list-group-item">In plain terms: typical relative error moved from ≈<strong>14.85%</strong> to ≈<strong>14.27%</strong> (using <em>e^(log-RMSE) - 1</em>), ~4% reduction in relative error.</li>
+                    </ul>
+
+                    <h5 class="mb-2">Why it likely improved</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Ridge regularization shrank noisy coefficients from the large one-hot design, reducing overfitting and stabilizing weights with multicollinearity.</li>
+                        <li class="list-group-item">Log1p transforms on skewed numeric features (e.g., <code>GrLivArea</code>, <code>TotalBsmtSF</code>, <code>1stFlrSF</code>, <code>LotArea</code>, <code>MasVnrArea</code>) made relationships more linear and less driven by extremes.</li>
+                        <li class="list-group-item">Standardization put features on comparable scales so Ridge’s L2 penalty is applied fairly across numeric and one-hot columns.</li>
+                    </ul>
+
+                    <h5 class="mb-2">What still looks improvable</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Linear models can miss mild nonlinear interactions (e.g., size × quality, age × remodel).</li>
+                        <li class="list-group-item">High-cardinality categoricals (e.g., <code>Neighborhood</code>) may still introduce sparsity and subtle over/under-penalization.</li>
+                        <li class="list-group-item">Feature semantics aren’t fully captured yet (e.g., combining areas into a <em>TotalSF</em>, or constructing <em>AgeAtSale</em>, <em>BathsTotal</em>, <em>PorchSF</em>).</li>
+                    </ul>
+
+                    <h5 class="mb-2">Takeaway</h5>
+                    <p class="mb-0">Experiment 2 delivers a meaningful, consistent bump over the baseline with modest complexity. The model is more robust and generalizes better—exactly what we wanted from regularization and skew handling.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Experiment 3 — Feature Engineering + Random Forest (Non-linear)</strong> <i class="bi bi-tree"></i></h3>
+                    <h5 class="mb-2">What I changed (vs. Experiments 1–2)</h5>
+                    <p>I added light feature engineering to capture domain meaning and switched from linear models to a tree-based model to learn non-linearities and interactions.</p>
+
+                    <h5 class="mb-2">Engineered features</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><code>TotalSF = GrLivArea + TotalBsmtSF</code>, <code>AgeAtSale = YrSold − YearBuilt</code>, <code>RemodAge = YrSold − YearRemodAdd</code></li>
+                        <li class="list-group-item"><code>BathsTotal = FullBath + 0.5·HalfBath</code>, <code>PorchSF = OpenPorchSF + EnclosedPorch + 3SsnPorch + ScreenPorch</code></li>
+                        <li class="list-group-item">Flags: <code>HasBsmt</code>, <code>HasGarage</code>, <code>HasFireplace</code>, <code>HasPool</code></li>
+                    </ul>
+
+                    <h5 class="mb-2">Model & preprocessing</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Model: <strong>RandomForestRegressor</strong> (600 trees).</li>
+                        <li class="list-group-item">Preprocessing: same as before (median/mode imputation + one-hot for categoricals). Trees don’t need scaling.</li>
+                        <li class="list-group-item">Target: still <code>log(1 + SalePrice)</code> to align with log-RMSE.</li>
+                    </ul>
+
+                    <h5 class="mb-2">Results</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Experiment 3 log-RMSE: <strong>0.14311</strong></li>
+                        <li class="list-group-item">Experiment 2 (Ridge) log-RMSE: <strong>0.13342</strong></li>
+                        <li class="list-group-item">Experiment 1 (Linear) log-RMSE: <strong>0.13846</strong></li>
+                    </ul>
+
+                    <h5 class="mb-2">How it changed from the previous experiment</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Compared to Exp 2, performance worsened by <strong>+0.00969</strong> log-RMSE (≈ 7.3% relative).</li>
+                        <li class="list-group-item">Compared to Exp 1, it’s <strong>+0.00465</strong> worse (≈ 3.4% relative).</li>
+                    </ul>
+
+                    <h5 class="mb-2">Why this likely happened (diagnosis)</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">High-cardinality one-hot features (e.g., <code>Neighborhood</code>) can be noisy for forests; trees may split on rare categories that don’t generalize.</li>
+                        <li class="list-group-item">The “default” forest can underfit/overfit without tuning (<code>max_depth</code>, <code>min_samples_leaf</code>, <code>max_features</code>), especially with sparse, wide matrices from one-hot.</li>
+                        <li class="list-group-item">Linear signals dominate this dataset (size/quality). Ridge leverages them well; a plain forest without careful tuning/GBM may not beat a well-regularized linear model.</li>
+                        <li class="list-group-item">Some engineered features may be redundant with existing columns, adding noise more than signal.</li>
+                    </ul>
+
+                    <h5 class="mb-2">What I learned</h5>
+                    <p class="mb-0">Non-linear models don’t automatically win on tabular data with many one-hot categoricals. Here, a regularized linear model (Exp 2) captured the major effects more cleanly than an untuned forest with sparse inputs.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Storytelling & Impact</strong> <i class="bi bi-chat-dots-fill text-secondary"></i></h3>
+                    <h5 class="mb-2">Impact</h5>
+                    <p>Building a house-price predictor isn’t just a technical exercise—it sits inside real markets, policies, and people’s lives. Here are the key potential benefits, risks, and mitigations I considered.</p>
+
+                    <h5 class="mt-3 mb-2">Potential benefits</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Consistency & speed</strong>: Automated estimates reduce turnaround time and noisy human variation in valuations (helpful for buyers, sellers, agents).</li>
+                        <li class="list-group-item"><strong>Transparency for comparisons</strong>: Feature-level effects (e.g., size, quality) can make pricing more explainable than gut feel, especially with simple linear models.</li>
+                        <li class="list-group-item"><strong>Scenario planning</strong>: Stakeholders can explore what‑ifs (e.g., “What if we finish the basement?”) to make more informed renovation or listing decisions.</li>
+                    </ul>
+
+                    <h5 class="mb-2">Risks & negative externalities</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Proxy bias / disparate impact</strong>: Categorical features like <em>Neighborhood</em> can encode historical inequities (e.g., redlining). Even without protected attributes, proxies can reproduce disparities in lending, appraisals, or taxes.</li>
+                        <li class="list-group-item"><strong>Feedback loops</strong>: If many actors price off the same model, its estimates can become self‑fulfilling, amplifying existing price gaps or gentrification patterns.</li>
+                        <li class="list-group-item"><strong>Overreliance</strong>: Treating a point estimate as truth ignores uncertainty and data drift (e.g., sudden market shocks), leading to mispricing or unfair decisions.</li>
+                        <li class="list-group-item"><strong>Privacy & consent</strong>: Training on detailed property data can raise questions about what was collected, who consented, and who can access the model’s outputs.</li>
+                        <li class="list-group-item"><strong>Unequal errors</strong>: Errors may be larger for homes with rare attributes or in underrepresented neighborhoods, shifting costs onto specific groups.</li>
+                        <li class="list-group-item"><strong>Interpretability gap</strong>: More complex models (trees/boosting) can outperform linear models but make it harder for consumers to understand why a price was assigned.</li>
+                    </ul>
+
+                    <h5 class="mb-2">How I would mitigate</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Fairness review of features</strong>: Limit or carefully handle obvious proxies (e.g., Neighborhood) and test with/without them; document trade‑offs.</li>
+                        <li class="list-group-item"><strong>Slice metrics</strong>: Report RMSE by subgroup (price bands, neighborhoods, home types) to detect uneven performance; if gaps exist, address them (rebalance data, add features, or adjust loss).</li>
+                        <li class="list-group-item"><strong>Uncertainty & guardrails</strong>: Publish prediction intervals (not just point estimates). Require human‑in‑the‑loop for high‑stakes uses (loans, taxes, insurance).</li>
+                        <li class="list-group-item"><strong>Model cards & versioning</strong>: Document data sources, time range, assumptions, known failure modes, and update cadence; monitor data drift over time.</li>
+                        <li class="list-group-item"><strong>Regularization & simplicity</strong>: Favor simpler models when accuracy is comparable to preserve explainability and reduce overfitting on spurious signals.</li>
+                        <li class="list-group-item"><strong>Ethical use policy</strong>: Restrict use to informational support, not as the sole determinant for lending/insuring/pricing; audit downstream decisions for disparate impact.</li>
+                    </ul>
+
+                    <h5 class="mb-2">Bottom line</h5>
+                    <p class="mb-0">This project can improve consistency and transparency in home valuations, but it also carries fairness, privacy, and overreliance risks—especially around location proxies and shifting markets. The responsible path combines careful feature choices, slice‑level evaluation, uncertainty reporting, and human oversight so the model informs decisions without quietly hard‑coding historical inequities.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-up">
+                    <h3 class="mb-4 text-center"><strong>Conclusion</strong> <i class="bi bi-flag-fill text-dark"></i></h3>
+                    <p>This project gave me hands-on practice turning a raw tabular dataset into a working regression pipeline and showed how specific choices change performance.</p>
+
+                    <h5 class="mb-2">What worked best</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Target log transform</strong> (<code>log(1 + SalePrice)</code>) was the single biggest stability win. It made errors more comparable across cheap vs. expensive homes and helped every model behave better.</li>
+                        <li class="list-group-item"><strong>Simple, consistent preprocessing</strong> (median imputation for numeric, most‑frequent + one‑hot for categoricals) was enough to get a strong baseline.</li>
+                        <li class="list-group-item"><strong>Regularization matters</strong>. Moving from plain OLS to Ridge (with light skew fixes and standardization) improved log‑RMSE from <strong>0.13846</strong> → <strong>0.13342</strong>. Shrinking coefficients helped with multicollinearity and the many one‑hot columns.</li>
+                    </ul>
+
+                    <h5 class="mb-2">What didn’t help (as used here)</h5>
+                    <p>My first non‑linear attempt—Random Forest with light feature engineering—did not beat Ridge (<strong>0.14311</strong>). Even with features like <em>TotalSF</em>, <em>AgeAtSale</em>, <em>BathsTotal</em>, etc., an untuned forest on a very wide, sparse one‑hot matrix underperformed. Lesson: on this dataset, well‑regularized linear models set a high bar unless tree/boosting models are carefully tuned.</p>
+
+                    <h5 class="mb-2">Feature selection & inclusion/exclusion</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">I intentionally started broad (use all features except <code>Id</code>) so the baseline wouldn’t miss important signal. With Ridge, this wide set performed better than early pruning.</li>
+                        <li class="list-group-item">Preliminary coefficient/importance checks suggest some redundancy (e.g., overlapping area features). A structured feature selection pass (e.g., removing highly collinear features, or combining them into <em>TotalSF</em>) is a good next step, but the regularized model already handled redundancy reasonably well.</li>
+                        <li class="list-group-item">Location proxies (e.g., <em>Neighborhood</em>) are powerful but raise fairness concerns; I would report slice metrics with and without them and document trade‑offs.</li>
+                    </ul>
+
+                    <h5 class="mb-2">Key takeaways</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Good preprocessing beats fancy modeling when data are tabular and mostly linear in spirit.</li>
+                        <li class="list-group-item">Regularization + light transforms (and standardization for penalized models) delivered the biggest improvement.</li>
+                        <li class="list-group-item">Non‑linear models need tuning (depth, leaf sizes, features) or gradient boosting to surpass a strong Ridge baseline.</li>
+                        <li class="list-group-item">Clear evaluation discipline (same split, same metric) makes comparisons meaningful.</li>
+                    </ul>
+
+                    <h5 class="mb-2">If I continued</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Try <code>HistGradientBoostingRegressor</code> / XGBoost / LightGBM with careful tuning and early stopping.</li>
+                        <li class="list-group-item">Add a small set of interaction features (e.g., <em>OverallQual × TotalSF</em>) and test whether Ridge/ElasticNet benefits.</li>
+                        <li class="list-group-item">Do feature audits (drop/keep experiments, grouped encodings for high‑cardinality categoricals) and report slice‑level RMSE to check fairness and robustness.</li>
+                        <li class="list-group-item">Produce prediction intervals to communicate uncertainty.</li>
+                    </ul>
+
+                    <p class="mb-0">Overall, I learned that a disciplined baseline plus targeted regularization can be hard to beat, and that the best gains come from thoughtful preprocessing, not just swapping models.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>References</strong> <i class="bi bi-book-fill"></i></h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Kaggle. House Prices: Advanced Regression Techniques (Ames Housing). Available at: <a href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview" target="_blank">https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview</a></li>
+                    </ul>
+                    <h5 class="mt-2 mb-2">Tools Used</h5>
+                    <p class="mb-0">ChatGPT (OpenAI, 2025) was used to clean up writing, improve clarity and professionalism, and help with page structuring.</p>
+                </section>
+
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-right">
+                    <h3 class="mb-3 text-center"><strong>Code</strong> <i class="bi bi-code-slash"></i></h3>
+                    <div class="my-2">
+                        <a href="#" target="_blank" class="btn btn-dark"><i class="bi bi-github me-1"></i> GitHub Repository</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 bg-secondary py-1 my-5"></div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2023 Kyle Lunsford. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+    </script>
+</body>
+</html>
+
+
