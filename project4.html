@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 4 - Kyle Lunsford's Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Kyle Lunsford</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section text-center py-4 mb-4" style="background: url('https://via.placeholder.com/1920x400?text=Project+4+Hero') no-repeat center center/cover; color: white;">
+        <div class="container">
+            <h1 class="display-4" data-aos="fade-down">Project 4: Clustering Analysis</h1>
+            <p class="lead" data-aos="fade-up">Exploring patterns through unsupervised learning.</p>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 mb-5 text-center bg-light text-dark py-3 rounded">Project Four</h1>
+                
+                <!-- Section 1: Introduce the Problem -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Problem</strong> <i class="bi bi-exclamation-triangle-fill text-warning"></i></h3>
+                    <p>In today's data-driven economy, credit card usage is an essential part of everyday financial life. People use their cards in vastly different ways some pay off their balances monthly, others rely heavily on credit, and some make frequent cash advances or purchases. Understanding these behaviors is crucial for banks and financial institutions that aim to improve customer satisfaction, manage risk, and design more personalized services. With the growth of machine learning, we can now ask an important question: <strong>Can we identify distinct groups of credit card users based on their spending and payment patterns?</strong></p>
+                    <p>This project explores that question using clustering techniques to uncover natural groupings among customers without prior labels or classifications. The dataset contains detailed financial behavior features such as balance amounts, purchase frequency, cash advances, credit limits, and payment histories. By analyzing these variables and applying clustering algorithms, the goal is to discover meaningful customer segments such as high spenders, minimal users, or revolving credit customers and understand what characterizes each group.</p>
+                    <p>The purpose is not only to perform clustering but also to reflect on what these clusters reveal about financial habits and their potential applications. If we can meaningfully segment users based on real-world financial data, such insights could help institutions design better financial products, detect risky patterns earlier, and promote responsible credit usage. At the same time, it raises important ethical questions about privacy, fairness, and how such models should be used when dealing with sensitive financial information.</p>
+                </section>
+
+                <!-- Section 2: What is Clustering and How Does It Work? -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>What is Clustering and How Does It Work?</strong> <i class="bi bi-diagram-3-fill text-primary"></i></h3>
+                    <p>Clustering is an unsupervised machine learning technique used to discover hidden patterns or natural groupings within data when there are no predefined labels. Unlike classification, where each record belongs to a known category, clustering lets the data speak for itself identifying groups of similar observations based purely on their feature values. In essence, clustering helps us uncover structure and relationships that might not be obvious at first glance.</p>
+                    
+                    <h5 class="mt-3">K-Means Clustering</h5>
+                    <p>One of the most common algorithms for clustering is K-Means. It works by dividing data into k groups, where each group contains points that are most similar to each other based on distance metrics like Euclidean distance. The algorithm starts by selecting k random centroids, then repeatedly assigns points to the nearest centroid and updates the centroids' positions until the clusters stabilize. K-Means is popular because it's simple, efficient, and works well with numerical data—making it ideal for financial datasets like ours.</p>
+                    
+                    <h5 class="mt-3">Agglomerative Hierarchical Clustering</h5>
+                    <p>Another approach, Agglomerative Hierarchical Clustering, builds clusters step by step. It begins by treating every data point as its own cluster, then progressively merges the most similar pairs until all points belong to a single large cluster. This creates a hierarchy, or "dendrogram," which can be cut at different levels to form distinct clusters. Unlike K-Means, hierarchical clustering doesn't require specifying the number of clusters in advance and provides a more detailed view of how groups relate to one another.</p>
+                    
+                    <h5 class="mt-3">The Goal of Clustering</h5>
+                    <p>Both methods aim to group data points that are internally cohesive but externally separated—meaning customers within the same cluster behave similarly, while those in different clusters show distinct financial patterns. By applying these techniques, we can better understand the diversity of credit card users and reveal segments that might otherwise remain hidden in raw numerical data.</p>
+                </section>
+
+                <!-- Section 3: Introduce the Data -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Data</strong> <i class="bi bi-database-fill text-info"></i></h3>
+                    <p>The dataset used for this project is the <strong>Credit Card Customers dataset (CC GENERAL)</strong>, which contains real-world data on the spending and payment behavior of credit card users. It includes <strong>8,950 customer records</strong> and <strong>18 numerical features</strong>, each describing different aspects of how customers manage and use their credit cards. The data is ideal for clustering because it has no predefined labels allowing us to naturally group customers based on similarities in their financial habits.</p>
+                    
+                    <h5 class="mt-3">Data Source</h5>
+                    <p>This dataset can be found on several open data platforms, including <a href="https://www.kaggle.com/datasets/arjunbhasin2013/ccdata" target="_blank">Kaggle's "Credit Card Dataset for Clustering"</a>, and is widely used for unsupervised learning and segmentation projects. Each row represents one customer, and each column provides a quantitative measure of their activity over a six-month period.</p>
+                    
+                    <h5 class="mt-3">Key Features</h5>
+                    <p>Some of the most important features include:</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>BALANCE</strong> – The average balance amount on the customer's credit card.</li>
+                        <li class="list-group-item"><strong>BALANCE_FREQUENCY</strong> – How frequently the balance is updated (1 means frequently, 0 means rarely).</li>
+                        <li class="list-group-item"><strong>PURCHASES</strong> – Total purchases made by the customer.</li>
+                        <li class="list-group-item"><strong>ONEOFF_PURCHASES</strong> – Purchases made in a single transaction (e.g., one-time big buys).</li>
+                        <li class="list-group-item"><strong>INSTALLMENTS_PURCHASES</strong> – Purchases made in installments.</li>
+                        <li class="list-group-item"><strong>CASH_ADVANCE</strong> – Amount of cash advances taken by the customer.</li>
+                        <li class="list-group-item"><strong>CREDIT_LIMIT</strong> – The customer's total credit limit.</li>
+                        <li class="list-group-item"><strong>PAYMENTS</strong> – Total amount paid by the customer over the period.</li>
+                        <li class="list-group-item"><strong>MINIMUM_PAYMENTS</strong> – The minimum payments made by the customer.</li>
+                        <li class="list-group-item"><strong>TENURE</strong> – The number of months the customer has been with the bank.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Why This Dataset Works Well for Clustering</h5>
+                    <p>Since the dataset only contains numerical variables, it simplifies preprocessing and allows direct use of algorithms like K-Means and Agglomerative Clustering. However, it also requires scaling to ensure that features measured on different scales (e.g., dollars vs. frequencies) do not unfairly dominate the distance calculations used in clustering.</p>
+                    <p>Overall, this dataset provides a rich view of diverse customer behaviors from frequent spenders and high-limit users to low-activity customers making it an excellent foundation for uncovering patterns in financial behavior through clustering.</p>
+                </section>
+
+                <!-- Section 4: Data Understanding/Visualization -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Data Understanding/Visualization</strong> <i class="bi bi-clipboard-data text-success"></i></h3>
+                    <p>Before clustering, it was important to explore the data to understand customer behavior and identify any patterns or irregularities. The dataset includes 8,950 customers and 17 numerical features after removing the ID column. Initial inspection showed that variables like BALANCE, PURCHASES, CASH_ADVANCE, and PAYMENTS were highly right-skewed, meaning most customers have low spending and a few have very high amounts. A histogram of PURCHASES made this clear, revealing that heavy spenders are rare but influential.</p>
+                    
+                    <h5 class="mt-3">Key Insights from Exploration</h5>
+                    <p>To better interpret the data, a log transformation was applied to spending features. The log-transformed PURCHASES distribution appeared more balanced, making differences between typical and high-spending users easier to see. A correlation heatmap of financial variables also showed strong relationships among purchase-related features and moderate links between BALANCE, CREDIT_LIMIT, and PAYMENTS.</p>
+                    <p>One notable finding was that many customers make few or no purchases at all, suggesting different types of usage patterns such as low-activity versus high-activity users. These insights guided preprocessing decisions, such as scaling and transforming features, to ensure clustering accurately reflects real behavioral differences rather than differences in numeric scales.</p>
+                    
+                    <h5 class="mt-3">How This Relates to Modeling</h5>
+                    <p>Understanding the distribution and relationships within the data helped determine which preprocessing steps were necessary for effective clustering. The right-skewed distributions indicated the need for log transformations, and the varying scales across features highlighted the importance of standardization before applying distance-based algorithms like K-Means.</p>
+                    
+                    <h5 class="mt-4">Visualizations</h5>
+                    <div class="mb-4" data-aos="fade-up">
+                        <h6 class="mb-2">Figure 1: Distribution of Purchases (Original Scale)</h6>
+                        <img src="images/project4_fig1.png" alt="Histogram of PURCHASES showing right-skewed distribution" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">The original PURCHASES distribution is highly right-skewed, with most customers making low purchases and a few heavy spenders.</p>
+                    </div>
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <h6 class="mb-2">Figure 2: Distribution of Purchases (Log-Transformed)</h6>
+                        <img src="images/project4_fig2.png" alt="Histogram of log-transformed PURCHASES" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">After log transformation, the distribution is more balanced, making it easier to distinguish between different spending levels.</p>
+                    </div>
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <h6 class="mb-2">Figure 3: Correlation Heatmap of Financial Features</h6>
+                        <img src="images/project4_fig3.png" alt="Correlation heatmap of key financial variables" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">The heatmap reveals strong correlations among purchase-related features and moderate relationships between balance, credit limit, and payments.</p>
+                    </div>
+                </section>
+
+                <!-- Section 5: Pre-processing the Data -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Pre-processing the Data</strong> <i class="bi bi-gear-fill text-secondary"></i></h3>
+                    <p>Before applying clustering algorithms, the dataset needed to be cleaned and standardized to ensure reliable results. First, the <code>CUST_ID</code> column was removed since it serves only as an identifier and does not contribute to behavioral patterns. Missing values were then handled — specifically, <code>MINIMUM_PAYMENTS</code> (313 missing) and <code>CREDIT_LIMIT</code> (1 missing) were replaced with each column's median value. Median imputation was chosen because it's less affected by outliers, which are common in financial data.</p>
+                    
+                    <h5 class="mt-3">Pre-processing Steps</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Remove Identifier Column:</strong> Dropped <code>CUST_ID</code> as it does not represent customer behavior or contribute to clustering.</li>
+                        <li class="list-group-item"><strong>Handle Missing Values:</strong> Applied median imputation to <code>MINIMUM_PAYMENTS</code> (313 missing) and <code>CREDIT_LIMIT</code> (1 missing) to preserve robustness against outliers.</li>
+                        <li class="list-group-item"><strong>Log Transformation:</strong> Applied log transformation to skewed variables such as <code>PURCHASES</code>, <code>BALANCE</code>, <code>CASH_ADVANCE</code>, and <code>PAYMENTS</code> to reduce the effect of extreme values and make patterns more visible.</li>
+                        <li class="list-group-item"><strong>Standardization (Z-score Scaling):</strong> Standardized all features to have mean 0 and standard deviation 1, ensuring equal contribution from all variables in distance calculations.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Why These Steps Matter for Clustering</h5>
+                    <p>Since the dataset contains only numerical features, no categorical encoding was required. However, because many variables had very different scales (for example, BALANCE could reach thousands while FREQUENCY values ranged between 0 and 1), standardization was applied using a z-score scaler. This step ensures that each feature contributes equally to the distance calculations used in clustering.</p>
+                    <p>The log transformations and standardization created a clean, consistent dataset suitable for distance-based clustering methods like K-Means and Agglomerative Clustering, preventing features with larger numeric ranges from dominating the clustering process.</p>
+                </section>
+
+                <!-- Section 6: Modeling (Clustering) -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Modeling (Clustering)</strong> <i class="bi bi-cpu-fill text-danger"></i></h3>
+                    <p>To uncover natural groupings among credit card users, both K-Means and Agglomerative Clustering were applied to the preprocessed dataset. The features were first standardized to ensure that variables on larger scales, such as BALANCE and PAYMENTS, did not dominate smaller, frequency-based features. Clustering was then performed on the scaled data to identify customers with similar financial behaviors.</p>
+                    
+                    <h5 class="mt-3">Determining the Number of Clusters</h5>
+                    <p>To determine an appropriate number of clusters for K-Means, the Elbow Method was used. By plotting the sum of squared distances for different values of k, a noticeable bend appeared around k = 4, indicating that four clusters provided a good balance between accuracy and simplicity. The K-Means model was then trained with four clusters, assigning each customer to one of the groups based on their spending and payment patterns.</p>
+                    
+                    <h5 class="mt-3">Model Comparison: K-Means vs. Agglomerative Clustering</h5>
+                    <p>To validate and compare results, Agglomerative Clustering was also performed using the same number of clusters. While K-Means tends to form more evenly sized clusters, Agglomerative Clustering can reveal hierarchical relationships between customers, showing which groups are more similar to each other. A PCA visualization of the results displayed clear separation between clusters, confirming that the chosen preprocessing and scaling steps effectively highlighted distinct behavioral patterns.</p>
+                    <p>Overall, both methods supported the idea that credit card users can be meaningfully segmented into groups based on spending activity, repayment habits, and credit usage. These clusters form the foundation for further interpretation and insights in the storytelling section.</p>
+                    
+                    <h5 class="mt-4">Model Visualizations</h5>
+                    <div class="mb-4" data-aos="fade-up">
+                        <h6 class="mb-2">Figure 4: Elbow Method for Optimal K</h6>
+                        <img src="images/project4_fig4.png" alt="Elbow plot showing optimal number of clusters" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">The elbow plot shows a noticeable bend at k = 4, indicating four clusters provide a good balance between model complexity and accuracy.</p>
+                    </div>
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <h6 class="mb-2">Figure 5: K-Means Cluster Visualization (PCA)</h6>
+                        <img src="images/project4_fig5.png" alt="PCA visualization of K-Means clusters" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">PCA visualization shows clear separation between the four clusters identified by K-Means, with each color representing a distinct customer segment.</p>
+                    </div>
+                    <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <h6 class="mb-2">Figure 6: Agglomerative Clustering Dendrogram</h6>
+                        <img src="images/project4_fig6.png" alt="Dendrogram from Agglomerative Clustering" class="img-fluid rounded mb-2">
+                        <p class="text-muted small mb-0">The dendrogram reveals hierarchical relationships between customer groups, showing how clusters merge and which segments are most similar to each other.</p>
+                    </div>
+                </section>
+
+                <!-- Section 7: Storytelling (Clustering Analysis) -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Storytelling (Clustering Analysis)</strong> <i class="bi bi-chat-dots-fill text-primary"></i></h3>
+                    <p>After applying K-Means and Agglomerative Clustering, four distinct groups of customers emerged, each representing a different type of credit card user. The clusters were analyzed by comparing their average values for key features such as BALANCE, PURCHASES, CASH_ADVANCE, CREDIT_LIMIT, and PAYMENTS to understand what behaviors defined each segment.</p>
+                    
+                    <h5 class="mt-3">What Did the Clusters Reveal?</h5>
+                    <p>The clustering analysis successfully identified four meaningful customer segments, each with distinct financial behaviors and patterns. These groups represent fundamentally different ways customers interact with their credit cards.</p>
+                    
+                    <h5 class="mt-3">Cluster Characteristics</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Cluster 1: Low-Activity Users</strong> — Customers with small balances, low purchase frequency, and minimal payments. These individuals likely use their cards sparingly or keep them primarily for emergencies.</li>
+                        <li class="list-group-item"><strong>Cluster 2: Moderate Users</strong> — Customers who made regular purchases and maintained consistent payment habits, reflecting balanced credit usage and financial stability.</li>
+                        <li class="list-group-item"><strong>Cluster 3: High Spenders</strong> — Characterized by large purchase amounts and higher credit limits. They tend to pay off most of their balances but are responsible for a significant portion of overall spending activity.</li>
+                        <li class="list-group-item"><strong>Cluster 4: Cash-Advance Users</strong> — Customers with relatively low purchases but high cash-advance transactions and larger outstanding balances, suggesting possible short-term credit dependence or financial stress.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Key Learnings</h5>
+                    <p>The analysis revealed that credit card users exhibit fundamentally different financial patterns that can be captured through clustering. Low-activity users represent a conservative approach to credit, while high spenders demonstrate confidence in their ability to manage large balances. The cash-advance segment raises potential concerns about financial stress, highlighting opportunities for targeted support or risk management.</p>
+                    
+                    <h5 class="mt-3">Answering Initial Questions</h5>
+                    <p>These insights directly address the initial question — <strong>Can we identify different types of credit card users based on spending and payment behavior?</strong> The answer is yes: clustering effectively revealed meaningful customer segments that highlight distinct financial patterns. This analysis shows how unsupervised learning can provide actionable insights, helping financial institutions better understand customer habits, design tailored products, and promote responsible credit use.</p>
+                </section>
+
+                <!-- Section 8: Impact Section -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Impact Section</strong> <i class="bi bi-globe text-info"></i></h3>
+                    <p>While this project provides valuable insights into customer behavior, it also raises important ethical and social considerations. Clustering can help financial institutions better understand their clients and design more personalized services, but it must be used responsibly. For example, segmenting customers based on spending or payment behavior could lead to unfair treatment if used to deny credit or impose higher fees on certain groups.</p>
+                    
+                    <h5 class="mt-3">Potential Positive Impacts</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Personalized Financial Services:</strong> Understanding customer segments allows banks to design products and services tailored to different financial behaviors, improving customer satisfaction and engagement.</li>
+                        <li class="list-group-item"><strong>Financial Education:</strong> Identifying at-risk customers (like those dependent on cash advances) enables institutions to offer targeted financial literacy programs and support.</li>
+                        <li class="list-group-item"><strong>Risk Management:</strong> Better understanding of customer patterns helps institutions manage credit risk more effectively while maintaining fair lending practices.</li>
+                        <li class="list-group-item"><strong>Customer-Focused Banking:</strong> Insights can drive more customer-centric strategies that promote responsible credit use and financial wellbeing.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Potential Negative Impacts & Concerns</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Discriminatory Treatment:</strong> Clustering could be misused to deny credit, impose higher fees, or provide inferior services to certain customer segments, particularly those identified as high-risk.</li>
+                        <li class="list-group-item"><strong>Privacy Concerns:</strong> The analysis relies on detailed financial behavior data, and misuse or poor data security could expose sensitive personal information and harm customers.</li>
+                        <li class="list-group-item"><strong>Lack of Transparency:</strong> Customers may not know they are being segmented or how these classifications affect their access to services and credit terms.</li>
+                        <li class="list-group-item"><strong>Reinforcing Financial Inequality:</strong> Customers already struggling financially (e.g., cash-advance users) could face additional barriers if flagged as risky without consideration of their circumstances.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Ethical Considerations & Responsible Use</h5>
+                    <p>There are also concerns about privacy and data transparency. The information used in this type of analysis represents real financial activity, and misuse or poor data security could harm customers. Therefore, while clustering offers clear business advantages, it should be applied with strong safeguards, clear consent policies, and fairness in mind. When used ethically, these insights can help promote better financial education, responsible credit use, and more customer-focused banking strategies.</p>
+                </section>
+
+                <!-- Section 9: References -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>References</strong> <i class="bi bi-book-fill text-success"></i></h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Arjun Bhasin. (2013). Credit Card Dataset for Clustering (CC GENERAL). Kaggle. Available at: <a href="https://www.kaggle.com/datasets/arjunbhasin2013/ccdata" target="_blank">https://www.kaggle.com/datasets/arjunbhasin2013/ccdata</a></li>
+                    </ul>
+                    <h5 class="mt-2 mb-2">Tools Used</h5>
+                    <p class="mb-0">Special thanks to ChatGPT (OpenAI, 2025) for assisting with writing cleanup, organization, and project layout.</p>
+                </section>
+
+                <!-- Section 10: Code -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-3 text-center"><strong>Code</strong> <i class="bi bi-code-slash"></i></h3>
+                   
+                    <div class="my-2">
+                        <a href="https://github.com/klunsfo7/Project_1" target="_blank" class="btn btn-dark"><i class="bi bi-github me-1"></i> GitHub Repository</a>
+                    </div>
+                    
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 bg-secondary py-1 my-5"></div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2023 Kyle Lunsford. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+    </script>
+</body>
+</html>
+
