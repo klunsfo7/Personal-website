@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 5 - Kyle Lunsford's Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Kyle Lunsford</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section text-center py-4 mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <div class="container">
+            <h1 class="display-4" data-aos="fade-down">Project 5: Streaming Recommendation System</h1>
+            <p class="lead" data-aos="fade-up">Building a hybrid content and rating-based recommender system for movies and TV shows.</p>
+            <a href="project5_demo.html" class="btn btn-light btn-lg mt-3" target="_blank"><i class="bi bi-play-circle me-2"></i>Try Live Demo</a>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 mb-5 text-center bg-light text-dark py-3 rounded">Project Five</h1>
+                
+                <!-- Section 1: Introduce the Problem -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Problem</strong> <i class="bi bi-exclamation-triangle-fill text-warning"></i></h3>
+                    <p>In the age of streaming services like Netflix, Hulu, Disney+, and Amazon Prime, users are overwhelmed with thousands of movies and TV shows to choose from. With so much content available, finding something new to watch that matches your interests can be surprisingly difficult. This phenomenon, known as "choice paralysis," often leads to users spending more time browsing than actually watching.</p>
+                    <p>This project addresses that challenge by building a <strong>recommendation system</strong> that helps users discover movies and TV shows similar to ones they already love. The system uses a hybrid approach combining content-based filtering (analyzing genres, descriptions, and metadata) with collaborative filtering (leveraging ratings and popularity) to surface relevant recommendations.</p>
+                    <p>The central question is: <strong>Can we build an effective recommender system that accurately suggests titles based on content similarity and viewer preferences?</strong> By analyzing a large dataset of streaming titles with metadata such as genres, descriptions, IMDb scores, and vote counts, this project demonstrates how machine learning and natural language processing can improve content discovery and enhance user experience in the streaming entertainment landscape.</p>
+                </section>
+
+                <!-- Section 2: What is a Recommendation System? -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>What is a Recommendation System?</strong> <i class="bi bi-diagram-3-fill text-primary"></i></h3>
+                    <p>A recommendation system is a type of information filtering algorithm designed to predict and suggest items that a user might be interested in. These systems are widely used across the internet — from suggesting products on Amazon to recommending songs on Spotify and videos on YouTube. The goal is to personalize the user experience by surfacing relevant content from a vast catalog.</p>
+                    
+                    <h5 class="mt-3">Types of Recommendation Systems</h5>
+                    <p>There are several approaches to building recommender systems:</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Content-Based Filtering:</strong> Recommends items similar to what the user has liked before by analyzing item features (e.g., genres, keywords, descriptions). If you enjoyed a sci-fi thriller, the system suggests other sci-fi thrillers.</li>
+                        <li class="list-group-item"><strong>Collaborative Filtering:</strong> Recommends items based on what similar users have liked. If users with similar viewing histories enjoyed a particular show, you're likely to enjoy it too.</li>
+                        <li class="list-group-item"><strong>Hybrid Approaches:</strong> Combine content-based and collaborative methods to leverage the strengths of both, providing more accurate and diverse recommendations.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">How This Project Works</h5>
+                    <p>This project implements a <strong>hybrid recommendation system</strong> using natural language processing (NLP) and weighted scoring. It analyzes textual features like genres and descriptions using TF-IDF (Term Frequency-Inverse Document Frequency) vectorization combined with cosine similarity to find content matches. Additionally, it incorporates IMDb scores and vote counts using a weighted rating formula to surface not just similar titles, but also high-quality, popular ones that viewers are more likely to enjoy.</p>
+                    <p>The system also supports genre-based search, allowing users to explore top-rated titles within specific genres, making it versatile for different discovery needs.</p>
+                </section>
+
+                <!-- Section 3: Introduce the Data -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Introduce the Data</strong> <i class="bi bi-database-fill text-info"></i></h3>
+                    <p>The dataset used for this project is a comprehensive collection of movies and TV shows available on various streaming platforms. It includes detailed metadata for each title, such as genres, descriptions, IMDb ratings, vote counts, release years, and content types (movie or show). This rich dataset provides the foundation for building an effective content-based recommendation system.</p>
+                    
+                    <h5 class="mt-3">Data Source</h5>
+                    <p>The dataset was sourced from publicly available streaming catalogs and IMDb data, aggregated to represent a diverse collection of entertainment content. Each record represents a unique title with associated metadata that describes its content and popularity.</p>
+                    
+                    <h5 class="mt-3">Key Features</h5>
+                    <p>The most important features in the dataset include:</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Title</strong> – The name of the movie or TV show.</li>
+                        <li class="list-group-item"><strong>Type</strong> – Whether the content is a movie or a TV show.</li>
+                        <li class="list-group-item"><strong>Genres</strong> – Categories describing the content (e.g., Drama, Comedy, Action, Sci-Fi).</li>
+                        <li class="list-group-item"><strong>Description</strong> – A text summary describing the plot or premise of the title.</li>
+                        <li class="list-group-item"><strong>IMDb Score</strong> – The average rating (0-10) from IMDb users, indicating overall quality.</li>
+                        <li class="list-group-item"><strong>IMDb Votes</strong> – The number of user votes, indicating popularity and reliability of the rating.</li>
+                        <li class="list-group-item"><strong>Release Year</strong> – The year the title was released.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Why This Dataset Works Well for Recommendations</h5>
+                    <p>The dataset's combination of textual features (genres and descriptions) and numerical ratings makes it ideal for a hybrid recommendation approach. The textual data enables content-based similarity matching, while the rating and vote data allow for quality-weighted ranking. This ensures that recommendations are not only similar in content but also reflect viewer preferences and quality standards.</p>
+                    <p>Additionally, the dataset's large size and diversity provide broad coverage across genres and content types, making the system useful for a wide variety of user preferences and discovery scenarios.</p>
+                </section>
+
+                <!-- Section 4: Data Understanding/Visualization -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Data Understanding/Visualization</strong> <i class="bi bi-clipboard-data text-success"></i></h3>
+                    <p>Before building the recommendation system, I explored the dataset to understand its structure, quality, and distribution. The dataset contains thousands of titles spanning various genres, release years, and quality levels. Initial inspection revealed that IMDb scores are generally distributed between 5.0 and 8.5, with most titles having moderate ratings, and a smaller number of exceptionally high or low-rated titles.</p>
+                    
+                    <h5 class="mt-3">Key Insights from Exploration</h5>
+                    <p>Genre analysis showed that Drama, Comedy, and Action are the most common genres, often appearing in combination with others. The distribution of IMDb votes revealed significant variation — some titles have millions of votes (indicating widespread popularity), while others have just a few thousand. This variance is important for the weighted scoring mechanism, which balances raw ratings with vote count credibility.</p>
+                    <p>Text analysis of descriptions showed that certain keywords and themes are strongly associated with specific genres. For example, "crime," "detective," and "murder" frequently appear in thriller and mystery descriptions, while "love," "family," and "life" are common in dramas and comedies. This natural clustering of language patterns validates the use of TF-IDF vectorization for content similarity.</p>
+                    
+                    <h5 class="mt-3">How This Relates to Modeling</h5>
+                    <p>Understanding these patterns informed the choice of features and preprocessing steps. The textual features (genres and descriptions) needed to be combined and vectorized for similarity calculations, while the rating features required a weighted formula to ensure recommendations favor both similar content and high-quality titles. The insights from data exploration confirmed that a hybrid approach would be most effective.</p>
+                </section>
+
+                <!-- Section 5: Pre-processing the Data -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Pre-processing the Data</strong> <i class="bi bi-gear-fill text-secondary"></i></h3>
+                    <p>Before building the recommendation engine, the data needed to be cleaned and transformed to ensure accurate similarity calculations and quality scoring. Several preprocessing steps were applied to prepare the dataset for modeling.</p>
+                    
+                    <h5 class="mt-3">Pre-processing Steps</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Handle Missing Values:</strong> Titles with missing descriptions or genres were either filled with placeholder text or removed, ensuring all records have usable content for similarity matching.</li>
+                        <li class="list-group-item"><strong>Text Normalization:</strong> Descriptions were converted to lowercase, and special characters were removed to standardize text for NLP processing.</li>
+                        <li class="list-group-item"><strong>Genre Parsing:</strong> Genre strings (often stored as comma-separated lists) were split and processed into consistent formats for filtering and similarity calculations.</li>
+                        <li class="list-group-item"><strong>Feature Engineering:</strong> Combined genres and descriptions into a single text field for TF-IDF vectorization, creating a unified content representation for each title.</li>
+                        <li class="list-group-item"><strong>Weighted Score Calculation:</strong> Computed a weighted rating for each title using a formula that balances IMDb score with vote count credibility, similar to IMDb's weighted rating formula.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Why These Steps Matter</h5>
+                    <p>Text normalization and feature engineering ensure that the TF-IDF vectorizer can accurately capture content similarity without being skewed by inconsistent formatting or missing data. The weighted score calculation is crucial for ranking recommendations — it ensures that titles with high ratings but few votes (which might be unreliable) are balanced against titles with moderate ratings but strong viewer consensus.</p>
+                    <p>These preprocessing steps create a clean, consistent dataset ready for similarity calculations and quality-based ranking, forming the foundation of an effective hybrid recommendation system.</p>
+                </section>
+
+                <!-- Section 6: Building the Recommendation Engine -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Building the Recommendation Engine</strong> <i class="bi bi-cpu-fill text-danger"></i></h3>
+                    <p>The recommendation system was built using a hybrid approach that combines content-based similarity with quality-weighted ranking. The process involved vectorizing textual features, computing similarity scores, and incorporating rating data to surface the best recommendations.</p>
+                    
+                    <h5 class="mt-3">TF-IDF Vectorization and Cosine Similarity</h5>
+                    <p>To measure content similarity, I used TF-IDF (Term Frequency-Inverse Document Frequency) vectorization on the combined genre and description text for each title. TF-IDF converts text into numerical vectors that reflect the importance of words within each document relative to the entire dataset. Titles with similar vocabulary and themes will have similar vectors.</p>
+                    <p>Cosine similarity was then computed between title vectors to identify the most similar content. This metric ranges from 0 (completely dissimilar) to 1 (identical), providing a straightforward way to rank titles by content similarity. For each title, the system identifies the top matches based on these similarity scores.</p>
+                    
+                    <h5 class="mt-3">Weighted Rating Formula</h5>
+                    <p>To ensure recommendations include not just similar content but also high-quality titles, I implemented a weighted rating formula inspired by IMDb's Top 250 methodology. The formula balances the raw IMDb score with the number of votes, giving more weight to titles with strong viewer consensus:</p>
+                    <p class="text-center"><code>Weighted Score = (v / (v + m)) × R + (m / (v + m)) × C</code></p>
+                    <p>Where <code>v</code> is the vote count, <code>m</code> is the minimum votes threshold, <code>R</code> is the average rating, and <code>C</code> is the mean rating across all titles. This ensures that highly-rated titles with few votes don't outrank moderately-rated titles with strong consensus.</p>
+                    
+                    <h5 class="mt-3">Combining Content and Quality</h5>
+                    <p>The final recommendation list for each title is generated by first finding the most similar titles based on content (cosine similarity), then sorting them by weighted score to prioritize quality. This hybrid approach ensures that users receive recommendations that are both relevant in content and likely to be enjoyable based on viewer ratings.</p>
+                    
+                    <h5 class="mt-3">Genre-Based Search</h5>
+                    <p>In addition to title-based recommendations, the system supports genre-based search, allowing users to explore top-rated titles within specific genres or genre combinations. This is done by filtering titles that match all specified genres, then ranking them by weighted score. This feature provides an alternative discovery mode for users who want to explore a particular type of content.</p>
+                </section>
+
+                <!-- Section 7: Results and Demo -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>Results and Demo</strong> <i class="bi bi-chat-dots-fill text-primary"></i></h3>
+                    <p>The recommendation system successfully generates relevant, high-quality recommendations for movies and TV shows. When tested with popular titles like "Breaking Bad," the system accurately suggests similar crime dramas with strong ratings, such as "Better Call Saul" and "The Wire." For genre-based searches, entering "Action, Sci-Fi" returns top-rated titles like "The Matrix" and "Inception."</p>
+                    
+                    <h5 class="mt-3">Interactive Demo</h5>
+                    <p>I've built an interactive web application where you can try the recommendation system yourself. The demo includes two modes:</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Search by Title:</strong> Enter the name of a movie or TV show to get personalized recommendations based on content similarity and quality.</li>
+                        <li class="list-group-item"><strong>Search by Genre:</strong> Enter one or more genres (comma-separated) to discover top-rated titles matching those categories.</li>
+                    </ul>
+                    <p>The system provides detailed information for each recommendation, including IMDb scores, vote counts, genres, and descriptions, helping users make informed viewing decisions.</p>
+                    
+                    <div class="text-center my-4">
+                        <a href="project5_demo.html" class="btn btn-primary btn-lg" target="_blank"><i class="bi bi-play-circle me-2"></i>Try the Live Demo</a>
+                    </div>
+                    
+                    <h5 class="mt-3">Key Findings</h5>
+                    <p>The hybrid approach proved highly effective — content-based similarity ensures recommendations match the user's genre and theme preferences, while weighted scoring ensures that suggested titles have strong viewer ratings. This combination addresses the key challenge of recommendation systems: balancing relevance with quality.</p>
+                    <p>The system's ability to suggest both title-based and genre-based recommendations makes it versatile and user-friendly, catering to different discovery patterns and preferences.</p>
+                </section>
+
+                <!-- Section 8: Impact Section -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-4 text-center"><strong>Impact Section</strong> <i class="bi bi-globe text-info"></i></h3>
+                    <p>Recommendation systems have become an integral part of the digital economy, influencing what we watch, listen to, read, and buy. While they offer clear benefits in helping users discover content and improving engagement, they also raise important ethical and social considerations that must be carefully managed.</p>
+                    
+                    <h5 class="mt-3">Potential Positive Impacts</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Improved User Experience:</strong> Helps users navigate overwhelming content catalogs and discover titles they're likely to enjoy, reducing decision fatigue.</li>
+                        <li class="list-group-item"><strong>Content Discovery:</strong> Surfaces lesser-known titles that match user preferences, promoting diverse content and supporting creators of niche content.</li>
+                        <li class="list-group-item"><strong>Business Value:</strong> Increases user engagement and satisfaction, which translates to higher retention and revenue for streaming platforms.</li>
+                        <li class="list-group-item"><strong>Personalization:</strong> Creates tailored experiences that respect individual preferences and viewing habits, making entertainment more accessible.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Potential Negative Impacts & Concerns</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Filter Bubbles:</strong> Over-reliance on recommendations can create echo chambers where users only see content similar to what they've already consumed, limiting exposure to diverse perspectives and new genres.</li>
+                        <li class="list-group-item"><strong>Algorithmic Bias:</strong> If training data reflects historical biases (e.g., underrepresentation of certain cultures or voices), the system may perpetuate these biases by under-recommending diverse content.</li>
+                        <li class="list-group-item"><strong>Privacy Concerns:</strong> Recommendation systems rely on collecting detailed user behavior data, raising concerns about data privacy, consent, and potential misuse of viewing history information.</li>
+                        <li class="list-group-item"><strong>Manipulation and Exploitation:</strong> Recommendation algorithms optimized purely for engagement might prioritize sensational or addictive content over quality, potentially exploiting psychological vulnerabilities.</li>
+                        <li class="list-group-item"><strong>Content Creator Impact:</strong> Smaller creators or unconventional content may struggle to get recommended if algorithms favor established, popular titles, potentially stifling innovation and diversity in entertainment.</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Ethical Considerations & Responsible Use</h5>
+                    <p>To use recommendation systems responsibly, developers and platforms should prioritize transparency, allowing users to understand why certain titles are recommended. Systems should also incorporate mechanisms for serendipity and diversity, occasionally suggesting content outside the user's typical preferences to prevent filter bubbles. Privacy protections and clear data usage policies are essential to maintain user trust.</p>
+                    <p>Additionally, recommendation systems should be regularly audited for bias and fairness, ensuring that content from diverse creators and perspectives receives equitable visibility. When designed and deployed thoughtfully, recommendation systems can enhance user experience while respecting individual autonomy and promoting a healthy, diverse media ecosystem.</p>
+                </section>
+
+                <!-- Section 9: References -->
+                <section class="mb-5 p-4 rounded bg-light shadow" data-aos="fade-right">
+                    <h3 class="mb-4 text-center"><strong>References</strong> <i class="bi bi-book-fill text-success"></i></h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">IMDb Datasets. Available at: <a href="https://www.imdb.com/interfaces/" target="_blank">https://www.imdb.com/interfaces/</a></li>
+                        <li class="list-group-item">Ricci, F., Rokach, L., & Shapira, B. (2015). <em>Recommender Systems Handbook</em> (2nd ed.). Springer.</li>
+                        <li class="list-group-item">Aggarwal, C. C. (2016). <em>Recommender Systems: The Textbook</em>. Springer.</li>
+                    </ul>
+                    <h5 class="mt-2 mb-2">Tools Used</h5>
+                    <p class="mb-0">This project used Python with scikit-learn for TF-IDF vectorization and similarity calculations, Pandas for data processing, and vanilla JavaScript for the web interface. Special thanks to ChatGPT (OpenAI, 2025) for assisting with writing, code optimization, and project organization.</p>
+                </section>
+
+                <!-- Section 10: Code -->
+                <section class="mb-5 p-4 rounded bg-white shadow" data-aos="fade-left">
+                    <h3 class="mb-3 text-center"><strong>Code & Demo</strong> <i class="bi bi-code-slash"></i></h3>
+                    <p class="text-center">Try the interactive recommendation system or view the source code:</p>
+                    <div class="text-center my-3">
+                        <a href="project5_demo.html" class="btn btn-primary btn-lg me-2" target="_blank"><i class="bi bi-play-circle me-1"></i> Live Demo</a>
+                        <a href="https://github.com/klunsfo7/Project_1" target="_blank" class="btn btn-dark btn-lg"><i class="bi bi-github me-1"></i> GitHub Repository</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 bg-secondary py-1 my-5"></div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2023 Kyle Lunsford. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+    </script>
+</body>
+</html>
+
