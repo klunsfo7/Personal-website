@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Kyle Lunsford's Website</title>
+    <title>About — Kyle Lunsford</title>
+    <meta name="description" content="About Kyle Lunsford — CS student at UNC Charlotte with a focus on data science, iOS development, and clean web design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
             <a class="navbar-brand" href="index.html">Kyle Lunsford</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -20,7 +25,7 @@
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="about.html">About Me</a>
+                        <a class="nav-link active" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="portfolio.html">Portfolio</a>
@@ -30,41 +35,138 @@
         </div>
     </nav>
 
-    <div class="container my-5">
-        <h1 class="mb-4">About Me</h1>
-        <div class="row">
-            <div class="col-md-8">
-                <p>Hi, I’m Kyle Lunsford — a Computer Science student with a concentration in Data Science at UNC Charlotte. I’m passionate about programming, web development, and using data to solve real-world problems. This website is both a portfolio of my class projects and a space to document my growth as a developer.</p>
-                <p>My interests span across multiple areas of technology, from building clean and functional web applications to analyzing data for meaningful insights. I enjoy the process of taking an idea, breaking it down into smaller steps, and bringing it to life through code. Along the way, I’ve worked with tools like Python, Java, JavaScript, and SQL, as well as libraries and frameworks for data visualization and web design.</p>
-                <p>Beyond academics, I enjoy staying active through sports, fitness, and outdoor activities. I’ve also worked as an intramural referee and a Land Guide at the Whitewater Center, which has helped me develop teamwork, communication, and leadership skills.</p>
-                <p>I’m always curious and eager to learn something new — whether that’s exploring a new programming language, diving deeper into data science, or experimenting with design ideas to improve my projects. My ultimate goal is to build skills that not only advance my career in tech but also create practical, impactful solutions for others.</p>
-                <p>Thanks for visiting my site! Feel free to browse through my projects and get a sense of how I approach problems, experiment with solutions, and continue to grow as a developer.</p>
-            </div>
-            <div class="col-md-4">
-                <img src="images/Kyle.png" alt="Profile Picture" class="img-fluid rounded">
-                <p class="text-center mt-2">Kyle Lunsford</p>
-                <div class="text-center">
-                    <a href="https://www.linkedin.com/in/kyle-lunsford-313663333" target="_blank" class="btn btn-primary mt-2">Connect on LinkedIn</a>
+    <main class="container my-5">
+        <section class="hero mb-5">
+            <div class="row align-items-center g-4">
+                <div class="col-md-8">
+                    <span class="eyebrow"><i class="bi bi-person-badge" aria-hidden="true"></i> About Me</span>
+                    <h1 class="mb-3">Kyle Lunsford</h1>
+                    <p class="lead mb-3">
+                        I'm a Computer Science student at UNC Charlotte with a concentration in Data Science.
+                        I enjoy turning ideas and data into practical, well-designed software — across web,
+                        data science, and iOS.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="https://www.linkedin.com/in/kyle-lunsford-313663333" target="_blank" rel="noopener" class="btn btn-primary">
+                            <i class="bi bi-linkedin me-1" aria-hidden="true"></i>Connect on LinkedIn
+                        </a>
+                        <a href="portfolio.html" class="btn btn-outline-primary">View Portfolio</a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="images/Kyle.png" alt="Kyle Lunsford" class="img-fluid rounded" style="max-height: 280px; box-shadow: var(--shadow-md); border: 1px solid var(--color-border);">
                 </div>
             </div>
-        </div>
-        <h2 class="mt-4">Skills</h2>
-        <ul class="list-group">
-            <li class="list-group-item">Python</li>
-            <li class="list-group-item">Java</li>
-            <li class="list-group-item">JavaScript</li>
-            <li class="list-group-item">SQL</li>
-            <li class="list-group-item">HTML & CSS</li>
-            <li class="list-group-item">Web Development</li>
-            <li class="list-group-item">Data Visualization</li>
-            <!-- Add more skills here -->
-        </ul>
-    </div>
+        </section>
 
-    <footer class="bg-light text-center py-3">
-        <p>&copy; 2023 Kyle Lunsford. All rights reserved.</p>
+        <section class="mb-5">
+            <div class="section-header">
+                <div>
+                    <h2>Background</h2>
+                    <p class="subtitle">A bit about me and how I work.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <p class="mb-0">
+                            I'm passionate about programming, web development, and using data to solve real-world problems.
+                            I enjoy taking an idea, breaking it into smaller steps, and bringing it to life with clean code
+                            and thoughtful design. I work mostly in Python, Java, JavaScript, and SQL, plus tools for data
+                            visualization and front-end development.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <p class="mb-0">
+                            Beyond academics, I stay active through sports, fitness, and outdoor activities.
+                            I've worked as an intramural referee and a Land Guide at the Whitewater Center, which
+                            helped me grow stronger teamwork, communication, and leadership skills. I'm always
+                            curious and eager to learn — new languages, new design ideas, new ways to ship better software.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <div class="section-header">
+                <div>
+                    <h2>Skills &amp; Tools</h2>
+                    <p class="subtitle">What I work with most often.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="skill-group">
+                        <h3><i class="bi bi-code-slash me-2 text-primary" aria-hidden="true"></i>Languages</h3>
+                        <ul class="skill-list">
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>JavaScript</li>
+                            <li>SQL</li>
+                            <li>Swift</li>
+                            <li>HTML &amp; CSS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-group">
+                        <h3><i class="bi bi-bar-chart me-2 text-primary" aria-hidden="true"></i>Data &amp; ML</h3>
+                        <ul class="skill-list">
+                            <li>Pandas</li>
+                            <li>NumPy</li>
+                            <li>scikit-learn</li>
+                            <li>Matplotlib</li>
+                            <li>Seaborn</li>
+                            <li>EDA &amp; Visualization</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-group">
+                        <h3><i class="bi bi-phone me-2 text-primary" aria-hidden="true"></i>App &amp; Web</h3>
+                        <ul class="skill-list">
+                            <li>SwiftUI</li>
+                            <li>SwiftData</li>
+                            <li>REST APIs</li>
+                            <li>Bootstrap</li>
+                            <li>Git &amp; GitHub</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row align-items-center g-3">
+                <div class="col-md-6">
+                    <div class="footer-name">Kyle Lunsford</div>
+                    <div class="small">Computer Science · Data Science · UNC Charlotte</div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="https://www.linkedin.com/in/kyle-lunsford-313663333" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <i class="bi bi-linkedin" style="font-size: 1.25rem;"></i>
+                    </a>
+                    <a href="https://github.com/klunsfo7" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="bi bi-github" style="font-size: 1.25rem;"></i>
+                    </a>
+                    <a href="portfolio.html" aria-label="Portfolio">
+                        <i class="bi bi-folder2-open" style="font-size: 1.25rem;"></i>
+                    </a>
+                </div>
+            </div>
+            <hr class="my-3" style="border-color: var(--color-border);">
+            <div class="small text-center">&copy; <span id="footer-year">2026</span> Kyle Lunsford. All rights reserved.</div>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
